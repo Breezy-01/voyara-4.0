@@ -1,0 +1,21 @@
+/* Phone refinements: keep existing search fields and layout. */
+.mobile-logout[hidden]{display:none!important}
+@media(max-width:760px){
+ body[class] .unified-navigation .navigation-personal .mobile-logout{display:flex;align-items:center;min-height:48px;padding:12px 16px;border:0;border-radius:10px;background:transparent;color:#25484a;font:600 16px Inter,system-ui,sans-serif;text-align:left;cursor:pointer}
+ .results-page .app-view-toggle button,.results-page #active-filters button,.results-page #clear-active-filters{min-height:44px}
+ body.account-profile-page .carousel-controls button,body.account-profile-page .collection-tabs button,.profile-carousel-controls button{min-width:44px;min-height:44px}
+ input:not([type=checkbox]):not([type=radio]):not([type=hidden]),textarea{font-size:16px!important}
+ .auth-input-wrap input{min-height:48px}
+ #manage-dialog .manage-actions{padding-bottom:env(safe-area-inset-bottom)}
+ #filter-dialog,.auth-modal-card,#manage-dialog{overscroll-behavior:contain}
+}
+@media(max-width:480px){
+ body.account-profile-page .collection-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;overflow:visible;padding:0 0 12px}
+ body.account-profile-page .collection-tabs button{min-width:0;width:100%;padding:10px 4px;font-size:12px;white-space:nowrap}
+}
+@media(max-width:760px){
+ .cruise-planner-layout{grid-template-columns:minmax(0,1fr)}
+ .cruise-planner-card,.cruise-planner-card label,.cruise-results-panel,.cruise-result-copy{min-width:0}
+ .cruise-planner-card :is(input,select){min-width:0;max-width:100%;box-sizing:border-box}
+}
+@media(max-width:400px){.cruise-time-fields{grid-template-columns:minmax(0,1fr)}}

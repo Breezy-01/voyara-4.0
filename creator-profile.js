@@ -1,0 +1,17 @@
+(() => {
+  const creators={travelpete:{name:'Travel Pete',bio:'Boat days, reef adventures and island discoveries.',post:'voyager-post-rose'},bahamaseats:{name:'Bahamas Eats',bio:'Local tables and food discoveries around Nassau.',post:'voyager-post-conch'},islandgirl:{name:'Island Girl',bio:'Beach days and sunset inspiration in The Bahamas.',post:'voyager-post-sunset'}};
+  const search=document.querySelector('#voyager-search');search.placeholder="Search this creator’s posts";search.setAttribute('aria-label','Search creator posts');document.querySelector('[data-voyager-topic=all]').textContent='All posts';
+  const creatorID=new URLSearchParams(location.search).get('creator'),creator=creators[creatorID];
+  const heading=document.querySelector('.voyager-page-heading');heading.replaceChildren();
+  const intro=document.createElement('section');intro.className='creator-intro';const back=document.createElement('a');back.href='voyagers.html';back.textContent='← All Voyagers';intro.append(back);
+  const h1=document.createElement('h1');h1.textContent=creator?.name||'Creator not found';intro.append(h1);
+  const bio=document.createElement('p');bio.textContent=creator?.bio||'This creator is not part of the current community preview.';intro.append(bio);
+  if(creator){const handle=document.createElement('p');handle.textContent='@'+creatorID+' · Community preview';intro.append(handle);const sample=document.querySelector(`[data-save="${creator.post}"]`)?.closest('[data-social-post]');const image=sample?.querySelector('.social-post-head img');if(creatorID==='travelpete'){const portrait=document.createElement('span');portrait.className='creator-monogram';portrait.textContent='TP';intro.prepend(portrait);}else if(image){const portrait=image.cloneNode();portrait.alt=creator.name;intro.prepend(portrait);}}
+  heading.append(intro);document.title=(creator?.name||'Creator not found')+' | Voyara';
+  document.querySelectorAll('[data-social-post]').forEach(post=>{if(!creator||post.querySelector('.social-save')?.dataset.save!==creator.post)post.remove();});
+  if(creator){const button=document.createElement('button');button.className='creator-follow';const status=document.createElement('p');status.setAttribute('role','status');const key='voyara-creator-follows';const read=()=>{try{const value=JSON.parse((window.VoyaraStore||localStorage).getItem(key)||'[]');return Array.isArray(value)?value:[];}catch{return [];}};
+    const render=()=>{const active=read().includes(creatorID);button.textContent=active?'Following':'Follow';button.setAttribute('aria-pressed',String(active));};
+    button.addEventListener('click',()=>{if(!window.VoyaraAuth?.isAuthenticated()){window.VoyaraAuth?.open();return;}const ids=read(),active=ids.includes(creatorID);try{(window.VoyaraStore||localStorage).setItem(key,JSON.stringify(active?ids.filter(id=>id!==creatorID):[...ids,creatorID]));render();status.textContent=active?'Unfollowed.':'Following in your local preview.';}catch{status.textContent='Could not save this change. Please try again.';}});heading.append(button,status);window.addEventListener('voyara:collections-change',render);window.addEventListener('storage',render);window.addEventListener('voyara:auth-change',render);render();}
+  document.querySelector('.voyager-ads')?.remove();const ads=document.createElement('div');ads.className='voyager-ads';ads.hidden=true;document.querySelector('main').append(ads);
+  window.filterVoyagersDesign?.();
+})();

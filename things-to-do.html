@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head><script src="demo-account.js?v=business1"></script><script src="booking-records.js"></script><script src="recovery-states.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Experiences in The Bahamas | Voyara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <link rel="stylesheet" href="styles.css?v=multi1">
+  <link rel="stylesheet" href="prototype.css?v=hearts4">
+  <link rel="stylesheet" href="search-app-filters.css?v=1">
+  <script src="prototype.js?v=business2" defer></script>
+  <link rel="stylesheet" href="discover.css?v=1">
+  <script src="event-data.js" defer></script><script src="search-logic.js" defer></script><script src="discover.js?v=2" defer></script>
+<link rel="stylesheet" href="ui-consistency.css?v=1">
+<link rel="stylesheet" href="navigation-design.css"><script src="navigation-design.js?v=exclusive-menus1" defer></script><link rel="stylesheet" href="recovery-states.css"><link rel="stylesheet" href="visual-polish.css"><link rel="stylesheet" href="islandly-theme.css"><link rel="stylesheet" href="filter-layout.css"><link rel="stylesheet" href="mobile-usability.css"><link rel="stylesheet" href="alignment-polish.css?v=16"></head>
+<body class="prototype-page results-page" id="top" data-discover-mode="experiences" data-search-controller="islandly">
+  <header class="header">
+      <a class="brand" href="index.html" aria-label="Voyara home"><img src="assets/voyara-logo.png" alt="Voyara" /></a>
+      <button class="menu-button" type="button" aria-label="Open navigation" aria-controls="home-navigation" aria-expanded="false"><svg class="menu-open-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><svg class="menu-close-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
+      <nav class="nav" id="home-navigation" aria-label="Main navigation">
+        <a class="active" aria-current="page" href="index.html">Discover</a><a href="events.html">Trending</a>
+        <a href="itineraries.html">Itineraries</a><a href="voyagers.html">Voyagers</a>
+        <div class="mobile-nav-personal"><span>Your Voyara</span><a href="favorites.html">Favourites</a><a href="profile.html#trips">My Trips</a><a href="profile.html">Account</a></div>
+      </nav>
+      <div class="header-actions">
+        <button class="line-icon-button" type="button" aria-label="Favorites"><span class="heart-icon" aria-hidden="true">♡</span></button>
+        <button class="line-icon-button" type="button" aria-label="Shopping bag"><span class="bag-icon" aria-hidden="true"></span></button>
+        <button class="avatar-button" type="button" aria-label="Account menu"><img src="assets/header-avatar.png" alt="" /></button>
+        
+      </div>
+    </header>
+
+  <main>
+    <div class="page-shell results-shell">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>›</span><a href="index.html">The Bahamas</a><span>›</span><span>Experiences</span></nav>
+      <div class="results-title-row">
+        <div><p class="eyebrow">CURATED BY LOCALS & TRAVELERS</p><h1>Discover your next island moment</h1><p>Book standout island moments recommended by the Voyara community.</p></div>
+        <div class="results-trust"><strong>4.8 ★</strong><span>from 18K+ traveler reviews</span></div>
+      </div>
+
+      <section class="results-search-band" id="search" aria-label="Search experiences">
+        <label class="results-search-main"><span>What are you looking for?</span><input id="page-search" type="search" placeholder="Beach clubs, boat tours, dining..."></label>
+      <div class="discover-search-tabs" role="tablist" aria-label="Discover">
+        <button id="experiences-tab" type="button" role="tab" aria-selected="true" aria-controls="discover-panel" data-discover-tab="experiences">Experiences</button>
+        <button id="events-tab" type="button" role="tab" aria-selected="false" aria-controls="discover-panel" tabindex="-1" data-discover-tab="events">Events</button>
+      </div>
+        <label><span>Where?</span><select id="island-filter"><option value="all">All islands</option><option value="nassau" selected>Nassau</option><option value="exuma">Exuma</option><option value="eleuthera">Eleuthera</option></select></label>
+        <button class="results-search-button" type="button" data-search-submit>Search</button>
+      </section>
+
+      <div id="discover-panel" role="tabpanel" aria-labelledby="experiences-tab">
+      <section class="discover-tools" aria-label="Search filters">
+        <div class="discover-controls">
+          <label class="discover-pill date-pill"><span class="date-prompt">Any date</span><input id="search-date" type="date" aria-label="Experience date"></label>
+          <label class="discover-pill"><select id="search-travelers" aria-label="Travelers"><option value="1">1 traveler</option><option value="2" selected>2 travelers</option><option value="3">3 travelers</option><option value="4">4 travelers</option></select></label>
+          <button class="discover-pill" id="open-filters" type="button" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16M8 4v6M16 14v6"/></svg><span class="filter-button-label">More filters</span> <span id="filter-count" hidden></span></button>
+        </div>
+        <div class="app-view-toggle" aria-label="Results view"><button class="active" type="button" data-results-view="list" aria-pressed="true">List</button><button type="button" data-results-view="map" aria-pressed="false">Map</button></div>
+      </section>
+
+      <div class="quick-filters" aria-label="Quick filters">
+        <label data-experience-only>Category<select id="quick-category"><option value="all">All experiences</option><option value="water">On the water</option><option value="beach">Beach clubs</option><option value="tour">Island tours</option><option value="food">Food & drink</option><option value="wellness">Wellness</option><option value="guides">Guides</option><option value="multiple" disabled>Multiple categories</option></select></label>
+        <label data-events-only hidden>Event type<select id="quick-event"><option value="all">All events</option><option value="music">Music</option><option value="nightlife">Nightlife</option><option value="food">Food</option><option value="culture">Culture</option><option value="multiple" disabled>Multiple types</option></select></label>
+        <label>Price per person<select id="quick-price"><option value="9999">Any price</option><option value="75">Up to $75</option><option value="150">Up to $150</option><option value="250">Up to $250</option></select></label>
+        <label data-experience-only>Duration<select id="quick-duration"><option value="all">Any duration</option><option value="2">Up to 2 hours</option><option value="4">Over 2–4 hours</option><option value="8">Over 4–under 8 hours</option><option value="24">8 hours or more</option><option value="multiple" disabled>Multiple durations</option></select></label>
+        <label data-events-only hidden>Time of day<select id="quick-time"><option value="all">Any time</option><option value="morning">Morning</option><option value="afternoon">Afternoon</option><option value="evening">Evening</option><option value="multiple" disabled>Multiple times</option></select></label>
+        <label class="family-filter" data-experience-only><input type="checkbox" id="quick-family">Family-friendly</label>
+        <label data-events-only hidden>Age restrictions<select id="quick-age"><option value="any">Any age policy</option><option value="all-ages">All ages welcome</option><option value="adult-only">Adults only · 18+</option></select></label>
+      </div>
+      <div class="active-filter-bar" hidden><span>Selected:</span><div id="active-filters" aria-label="Active filters"></div><button type="button" id="clear-active-filters">Clear all</button></div>
+      <p id="search-status" class="search-status" role="status"></p>
+      <p class="search-availability-note">Explore sample listings. Experience availability is confirmed with the host; event dates are fixed.</p>
+      <div class="results-layout">
+
+
+        <section class="results-content">
+          <div class="results-toolbar">
+            <div><strong id="result-count" aria-live="polite" aria-atomic="true">12 results</strong><span>Curated island experiences</span></div>
+            <label>Sort by <select id="sort-results"><option value="recommended">Recommended</option><option value="rating">Traveler rating</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="soonest">Soonest</option></select></label>
+          </div>
+          <div class="results-list" id="results-list">
+            <article class="result-card" data-filter-card data-category="water" data-island="nassau" data-price="145" data-duration="3.5" data-rating="4.9" data-time="morning afternoon" data-features="free-cancel instant pickup local" data-order="1">
+              <a class="result-image" aria-label="Turtle Cove Snorkeling & Reef Cruise" href="activity-detail.html?id=turtle-cove" style="background-image:url('https://images.pexels.com/photos/7210380/pexels-photo-7210380.jpeg?auto=compress&cs=tinysrgb&w=1200')"><span class="listing-badge">BEST SELLER</span></a>
+              <div class="result-info"><div class="result-kicker">Water adventure · Nassau</div><h2><a href="activity-detail.html?id=turtle-cove">Turtle Cove Snorkeling & Reef Cruise</a></h2><p>Swim vibrant reefs with a local marine guide, then unwind with refreshments aboard a small-group boat.</p><div class="result-facts"><span>◷ 3.5 hours</span><span>✓ Free cancellation</span><span>🚐 Pickup available</span></div><div class="result-rating"><strong>4.9 ★</strong><span>1,284 reviews</span><span class="community-pick">Community pick</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Turtle Cove Snorkeling & Reef Cruise" data-save="turtle-cove">♡</button><span>From</span><strong>$145</strong><small>per adult</small><a class="primary-action" href="activity-detail.html?id=turtle-cove">View availability</a></div>
+            </article>
+            <article class="result-card" data-filter-card data-category="beach" data-island="nassau" data-price="89" data-duration="8" data-rating="4.8" data-time="morning afternoon" data-features="free-cancel instant accessible" data-order="2">
+              <a class="result-image" aria-label="Azure Beach Club Day Pass" href="activity-detail.html?id=azure-day-pass" style="background-image:url('https://images.pexels.com/photos/17908376/pexels-photo-17908376.jpeg?auto=compress&cs=tinysrgb&w=1200')"><span class="listing-badge coral">LIKELY TO SELL OUT</span></a>
+              <div class="result-info"><div class="result-kicker">Beach club · Cable Beach</div><h2><a href="activity-detail.html?id=azure-day-pass">Azure Beach Club Day Pass</a></h2><p>Reserved lounger, infinity-pool access, welcome drink and a beachfront lunch credit for an effortless island day.</p><div class="result-facts"><span>◷ Full day</span><span>✓ Free cancellation</span><span>♿ Accessible</span></div><div class="result-rating"><strong>4.8 ★</strong><span>746 reviews</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Azure Beach Club Day Pass" data-save="azure-day-pass">♡</button><span>From</span><strong>$89</strong><small>per adult</small><a class="primary-action" href="activity-detail.html?id=azure-day-pass">View availability</a></div>
+            </article>
+            <article class="result-card" data-filter-card data-category="tour" data-island="nassau" data-price="59" data-duration="2.5" data-rating="4.7" data-time="morning afternoon" data-features="free-cancel instant pickup local accessible" data-order="3">
+              <a class="result-image" aria-label="Nassau Highlights &amp; Tastings" href="activity-detail.html?id=nassau-city" style="background-image:url('https://images.pexels.com/photos/4119236/pexels-photo-4119236.jpeg?auto=compress&cs=tinysrgb&w=1200')"></a>
+              <div class="result-info"><div class="result-kicker">Local tour · Downtown Nassau</div><h2><a href="activity-detail.html?id=nassau-city">Nassau Highlights &amp; Tastings</a></h2><p>See the Queen’s Staircase, historic forts and colorful markets with stories and bites from a born-and-raised host.</p><div class="result-facts"><span>◷ 2.5 hours</span><span>✓ Free cancellation</span><span>Local host</span></div><div class="result-rating"><strong>4.7 ★</strong><span>932 reviews</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Nassau Highlights &amp; Tastings" data-save="nassau-city">♡</button><span>From</span><strong>$59</strong><small>per adult</small><a class="primary-action" href="activity-detail.html?id=nassau-city">View availability</a></div>
+            </article>
+            <article class="result-card event-result" data-filter-card data-category="events" data-island="nassau" data-price="65" data-duration="4" data-rating="4.9" data-time="evening" data-features="instant accessible local" data-event-date="20261106" data-event-types="music culture" data-order="4">
+              <a class="result-image" aria-label="Junkanoo Live on the Harbour" href="event-detail.html?id=junkanoo-live" style="background-image:url('https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=900&q=82')"><span class="event-date-badge"><b>06</b>NOV</span></a>
+              <div class="result-info"><div class="result-kicker">Live event · Nassau Harbour</div><h2><a href="event-detail.html?id=junkanoo-live">Junkanoo Live on the Harbour</a></h2><div class="event-schedule"><time datetime="2026-11-06">Fri, Nov 6, 2026 · 8:00 PM</time><span>Nassau Harbour</span></div><p>A high-energy evening of drums, dancing, local food stalls and sunset harbour views.</p><div class="result-facts"><span>Instant tickets</span><span>Local performers</span></div><div class="result-rating"><strong>4.9 ★</strong><span>387 attendees</span><span class="community-pick">Voyara event</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Junkanoo Live on the Harbour" data-save="junkanoo-live">♡</button><span>Tickets from</span><strong>$65</strong><small>per person</small><a class="primary-action" href="event-detail.html?id=junkanoo-live">Get tickets</a></div>
+            </article>
+            <article class="result-card" data-filter-card data-category="food" data-island="nassau" data-price="85" data-duration="2" data-rating="4.9" data-time="evening" data-features="free-cancel instant local accessible" data-order="5">
+              <a class="result-image" aria-label="Island Chef’s Table by the Water" href="activity-detail.html?id=chef-table" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=88')"><span class="listing-badge">NEW</span></a>
+              <div class="result-info"><div class="result-kicker">Food & drink · Cable Beach</div><h2><a href="activity-detail.html?id=chef-table">Island Chef’s Table by the Water</a></h2><p>A five-course modern Bahamian tasting menu hosted by a celebrated local chef at a sunset waterfront table.</p><div class="result-facts"><span>◷ 2 hours</span><span>✓ Free cancellation</span><span>Local host</span></div><div class="result-rating"><strong>4.9 ★</strong><span>219 reviews</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Island Chef’s Table by the Water" data-save="chef-table">♡</button><span>From</span><strong>$85</strong><small>per adult</small><a class="primary-action" href="activity-detail.html?id=chef-table">View availability</a></div>
+            </article>
+            <article class="result-card" data-filter-card data-category="water" data-island="exuma" data-price="235" data-duration="8" data-rating="4.9" data-time="morning afternoon" data-features="free-cancel instant pickup local" data-order="6">
+              <a class="result-image" aria-label="Exuma Cays, Sandbars & Swimming Pigs" href="activity-detail.html?id=exuma-cays" style="background-image:url('https://images.pexels.com/photos/4985286/pexels-photo-4985286.jpeg?auto=compress&cs=tinysrgb&w=1200')"><span class="listing-badge coral">SPECIAL OFFER</span></a>
+              <div class="result-info"><div class="result-kicker">Boat day · Exuma</div><h2><a href="activity-detail.html?id=exuma-cays">Exuma Cays, Sandbars & Swimming Pigs</a></h2><p>Spend a full day island-hopping by speedboat with reef stops, a sandbar picnic and the famous swimming pigs.</p><div class="result-facts"><span>◷ 8 hours</span><span>✓ Free cancellation</span><span>🚐 Pickup included</span></div><div class="result-rating"><strong>4.9 ★</strong><span>1,106 reviews</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Exuma Cays, Sandbars & Swimming Pigs" data-save="exuma-cays">♡</button><span>From</span><strong>$235</strong><small>per adult</small><a class="primary-action" href="activity-detail.html?id=exuma-cays">View availability</a></div>
+            </article>
+            <article class="result-card event-result" data-filter-card data-category="events" data-island="nassau" data-price="40" data-duration="5" data-rating="4.7" data-time="evening" data-features="instant local" data-event-date="20261031" data-event-types="nightlife music" data-order="7">
+              <a class="result-image" aria-label="Sunset Beach Session" href="event-detail.html?id=sunset-session" style="background-image:url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=82')"><span class="event-date-badge"><b>31</b>OCT</span></a>
+              <div class="result-info"><div class="result-kicker">Beach party · Cable Beach</div><h2><a href="event-detail.html?id=sunset-session">Sunset Beach Session</a></h2><div class="event-schedule"><time datetime="2026-10-31">Sat, Oct 31, 2026 · 5:30 PM</time><span>Cable Beach</span></div><p>Resident DJs, barefoot dancing, beach bites and cocktails from golden hour into the night.</p><div class="result-facts"><span>Instant tickets</span><span>18+</span></div><div class="result-rating"><strong>4.7 ★</strong><span>284 attendees</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Sunset Beach Session" data-save="sunset-session">♡</button><span>Tickets from</span><strong>$40</strong><small>per person</small><a class="primary-action" href="event-detail.html?id=sunset-session">Get tickets</a></div>
+            </article>
+            <article class="result-card" data-filter-card data-category="wellness" data-island="nassau" data-price="160" data-duration="1.5" data-rating="4.8" data-time="morning afternoon" data-features="free-cancel instant accessible" data-order="8">
+              <a class="result-image" aria-label="Oceanfront Spa Ritual" href="activity-detail.html?id=ocean-spa" style="background-image:url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=82')"></a>
+              <div class="result-info"><div class="result-kicker">Wellness · Paradise Island</div><h2><a href="activity-detail.html?id=ocean-spa">Oceanfront Spa Ritual</a></h2><p>A restorative massage, island salt scrub and quiet time on a private ocean terrace.</p><div class="result-facts"><span>◷ 90 minutes</span><span>✓ Free cancellation</span><span>♿ Accessible</span></div><div class="result-rating"><strong>4.8 ★</strong><span>408 reviews</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Oceanfront Spa Ritual" data-save="ocean-spa">♡</button><span>From</span><strong>$160</strong><small>per adult</small><a class="primary-action" href="activity-detail.html?id=ocean-spa">View availability</a></div>
+            </article>
+            <article class="result-card" data-filter-card data-category="tour" data-island="eleuthera" data-price="125" data-duration="6" data-rating="4.8" data-time="morning afternoon" data-features="free-cancel pickup local" data-order="9">
+              <a class="result-image" aria-label="Hidden Eleuthera with a Local Guide" href="activity-detail.html?id=hidden-eleuthera" style="background-image:url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1400&q=88')"></a>
+              <div class="result-info"><div class="result-kicker">Island tour · Eleuthera</div><h2><a href="activity-detail.html?id=hidden-eleuthera">Hidden Eleuthera with a Local Guide</a></h2><p>Pink sand, glass-window views, roadside conch and secluded coves on a laid-back private island drive.</p><div class="result-facts"><span>◷ 6 hours</span><span>✓ Free cancellation</span><span>🚐 Pickup included</span></div><div class="result-rating"><strong>4.8 ★</strong><span>172 reviews</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Hidden Eleuthera with a Local Guide" data-save="hidden-eleuthera">♡</button><span>From</span><strong>$125</strong><small>per adult</small><a class="primary-action" href="activity-detail.html?id=hidden-eleuthera">View availability</a></div>
+            </article>
+            <article class="result-card event-result" data-filter-card data-category="events" data-island="nassau" data-price="25" data-duration="3" data-rating="4.6" data-time="evening" data-features="instant accessible local" data-event-date="20261113" data-event-types="culture food" data-order="10">
+              <a class="result-image" aria-label="Nassau Art Walk After Dark" href="event-detail.html?id=art-walk" style="background-image:url('https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=900&q=82')"><span class="event-date-badge"><b>13</b>NOV</span></a>
+              <div class="result-info"><div class="result-kicker">Culture · Downtown Nassau</div><h2><a href="event-detail.html?id=art-walk">Nassau Art Walk After Dark</a></h2><div class="event-schedule"><time datetime="2026-11-13">Fri, Nov 13, 2026 · 6:00 PM</time><span>Downtown Nassau</span></div><p>Open studios, street food, gallery talks and live performances through the historic downtown lanes.</p><div class="result-facts"><span>Instant tickets</span><span>All ages</span></div><div class="result-rating"><strong>4.6 ★</strong><span>196 attendees</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Nassau Art Walk After Dark" data-save="art-walk">♡</button><span>Tickets from</span><strong>$25</strong><small>per person</small><a class="primary-action" href="event-detail.html?id=art-walk">Get tickets</a></div>
+            </article>
+            <article class="result-card" data-filter-card data-category="water" data-island="nassau" data-price="72" data-duration="2.5" data-rating="4.7" data-time="evening" data-features="free-cancel instant local" data-order="11">
+              <a class="result-image" aria-label="Small-Group Sunset Sail" href="activity-detail.html?id=sunset-sail" style="background-image:url('https://images.pexels.com/photos/4443600/pexels-photo-4443600.jpeg?auto=compress&cs=tinysrgb&w=1200')"></a>
+              <div class="result-info"><div class="result-kicker">Sailing · Nassau Harbour</div><h2><a href="activity-detail.html?id=sunset-sail">Small-Group Sunset Sail</a></h2><p>Watch Nassau turn gold from a relaxed catamaran with local bites, sparkling wine and island music.</p><div class="result-facts"><span>◷ 2.5 hours</span><span>✓ Free cancellation</span><span>Local crew</span></div><div class="result-rating"><strong>4.7 ★</strong><span>613 reviews</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Small-Group Sunset Sail" data-save="sunset-sail">♡</button><span>From</span><strong>$72</strong><small>per adult</small><a class="primary-action" href="activity-detail.html?id=sunset-sail">View availability</a></div>
+            </article>
+            <article class="result-card event-result" data-filter-card data-category="events" data-island="exuma" data-price="80" data-duration="6" data-rating="4.8" data-time="evening" data-features="instant local" data-event-date="20261121" data-event-types="music" data-order="12">
+              <a class="result-image" aria-label="Exuma Sound Weekend" href="event-detail.html?id=exuma-live" style="background-image:url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=82')"><span class="event-date-badge"><b>21</b>NOV</span></a>
+              <div class="result-info"><div class="result-kicker">Music festival · George Town</div><h2><a href="event-detail.html?id=exuma-live">Exuma Sound Weekend</a></h2><div class="event-schedule"><time datetime="2026-11-21">Sat, Nov 21, 2026 · 7:00 PM</time><span>George Town waterfront, Exuma</span></div><p>Two waterfront stages celebrating Bahamian music, emerging artists and sunset performances.</p><div class="result-facts"><span>Instant tickets</span><span>Local artists</span></div><div class="result-rating"><strong>4.8 ★</strong><span>521 attendees</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Exuma Sound Weekend" data-save="exuma-live">♡</button><span>Tickets from</span><strong>$80</strong><small>per person</small><a class="primary-action" href="event-detail.html?id=exuma-live">Get tickets</a></div>
+            </article>
+            <article class="result-card event-result" data-filter-card data-category="events" data-island="nassau" data-price="55" data-duration="3" data-rating="0" data-time="evening" data-features="instant local" data-event-date="20261128" data-event-types="nightlife music" data-order="16">
+              <a class="result-image" aria-label="Moonlight Boat Party" href="event-detail.html?id=boat-party" style="background-image:url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=82')"><span class="event-date-badge"><b>28</b>NOV</span></a>
+              <div class="result-info"><div class="result-kicker">Nightlife · Nassau</div><h2><a href="event-detail.html?id=boat-party">Moonlight Boat Party</a></h2><div class="event-schedule"><time datetime="2026-11-28">Sat, Nov 28, 2026 · 9:00 PM</time><span>Bay Street Marina, Nassau</span></div><p>A late-night harbour cruise with local DJs, sea breezes and city lights.</p><div class="result-facts"><span>Instant tickets</span><span>Ages 18+</span></div><div class="result-rating"><span>New sample event</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Moonlight Boat Party" data-save="boat-party">♡</button><span>Tickets from</span><strong>$55</strong><small>per person</small><a class="primary-action" href="event-detail.html?id=boat-party">Get tickets</a></div>
+            </article>
+            <article class="result-card" data-filter-card data-category="guides" data-island="nassau" data-price="0" data-duration="2" data-rating="4.9" data-time="morning afternoon" data-features="local accessible" data-order="13">
+              <a class="result-image" aria-label="5 Restaurants You Can’t Miss in Nassau" href="nassau-food-guide.html" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=88')"><span class="listing-badge">GUIDE</span></a>
+              <div class="result-info"><div class="result-kicker">Community guide · Nassau</div><h2><a href="nassau-food-guide.html">5 Restaurants You Can’t Miss in Nassau</a></h2><p>Bahamas Eats shares five essential tables, from casual conch to waterfront dining.</p><div class="result-facts"><span>5 places</span><span>Local creator</span><span>Free guide</span></div><div class="result-rating"><strong>4.9 ★</strong><span>1.3K saves</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save 5 Restaurants You Can’t Miss in Nassau" data-save="nassau-food-guide">♡</button><span>Community guide</span><strong>Free</strong><small>save for later</small><a class="primary-action" href="nassau-food-guide.html">Read guide</a></div>
+            </article>
+            <article class="result-card" data-filter-card data-category="guides" data-island="nassau" data-price="0" data-duration="4" data-rating="4.8" data-time="morning afternoon" data-features="local accessible" data-order="14">
+              <a class="result-image" aria-label="The Perfect Day in Rose Island" href="rose-island-itinerary.html" style="background-image:url('https://images.pexels.com/photos/17908376/pexels-photo-17908376.jpeg?auto=compress&cs=tinysrgb&w=1400')"><span class="listing-badge">GUIDE</span></a>
+              <div class="result-info"><div class="result-kicker">Community guide · Rose Island</div><h2><a href="rose-island-itinerary.html">The Perfect Day in Rose Island</a></h2><p>Travel Pete’s timing, snorkeling stops and practical boat-day advice in one route.</p><div class="result-facts"><span>Full-day route</span><span>Creator tested</span><span>Free guide</span></div><div class="result-rating"><strong>4.8 ★</strong><span>2.1K saves</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save The Perfect Day in Rose Island" data-save="rose-island-guide">♡</button><span>Community guide</span><strong>Free</strong><small>save for later</small><a class="primary-action" href="rose-island-itinerary.html">Read guide</a></div>
+            </article>
+            <article class="result-card" data-filter-card data-category="guides" data-island="nassau" data-price="0" data-duration="8" data-rating="4.9" data-time="morning afternoon evening" data-features="local accessible" data-order="15">
+              <a class="result-image" aria-label="Girls Trip Weekend in Nassau" href="girls-trip-itinerary.html" style="background-image:url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1400&q=88')"><span class="listing-badge">GUIDE</span></a>
+              <div class="result-info"><div class="result-kicker">Community guide · Nassau</div><h2><a href="girls-trip-itinerary.html">Girls Trip Weekend in Nassau</a></h2><p>Island Girl’s complete weekend guide to beach clubs, dinners and nightlife.</p><div class="result-facts"><span>48-hour route</span><span>Local creator</span><span>Free guide</span></div><div class="result-rating"><strong>4.9 ★</strong><span>1.6K saves</span></div></div>
+              <div class="result-book"><button class="save-card" aria-label="Save Girls Trip Weekend in Nassau" data-save="girls-trip-guide">♡</button><span>Community guide</span><strong>Free</strong><small>save for later</small><a class="primary-action" href="girls-trip-itinerary.html">Read guide</a></div>
+            </article>
+          </div>
+          <div class="results-map" id="results-map" hidden aria-label="Illustrative map of matching experiences"><div class="results-map-surface" id="results-map-surface"></div><p>Map design preview · pin positions are illustrative, not actual locations</p></div>
+          <div class="empty-state" id="empty-state"><h2>No matches found</h2><p>Try another search or clear your filters to explore more of the islands.</p><button type="button" class="primary-action" id="reset-results">Clear search & filters</button></div>
+        </section>
+      </div>
+      </div>
+    </div>
+  </main>
+  <dialog id="filter-dialog" aria-labelledby="filter-title">        <aside class="results-sidebar" id="results-filters">
+          <div class="filter-heading"><h2 id="filter-title">Refine your experience</h2><button type="button" id="close-filters" aria-label="Close filters">×</button></div>
+          <fieldset data-experience-only><legend>Experience type</legend>
+            <label><input type="checkbox" data-filter-category value="water"> Water adventures</label>
+            <label><input type="checkbox" data-filter-category value="beach"> Beach clubs & day passes</label>
+            <label><input type="checkbox" data-filter-category value="tour"> Guided island tours</label>
+            <label><input type="checkbox" data-filter-category value="food"> Food & drink</label>
+            <label><input type="checkbox" data-filter-category value="wellness"> Spa & wellness</label>
+            <label><input type="checkbox" data-filter-category value="guides"> Community guides</label>
+          </fieldset>
+          <fieldset data-events-only hidden><legend>Event type</legend><label><input type="checkbox" data-filter-event value="music"> Music</label><label><input type="checkbox" data-filter-event value="nightlife"> Nightlife</label><label><input type="checkbox" data-filter-event value="food"> Food</label><label><input type="checkbox" data-filter-event value="culture"> Culture</label></fieldset>
+          <fieldset><legend id="audience-label">Who’s coming?</legend><label><input type="radio" name="result-audience" value="any" checked> Any age policy</label><label><input type="radio" name="result-audience" value="all-ages"> All ages welcome</label><label data-events-only hidden><input type="radio" name="result-audience" value="adult-only"> Adults only · 18+</label></fieldset>
+          <fieldset><legend>Price per person</legend>
+            <label><input type="radio" name="result-price" value="9999" checked> Any price</label>
+            <label><input type="radio" name="result-price" value="75"> Up to $75</label>
+            <label><input type="radio" name="result-price" value="150"> Up to $150</label>
+            <label><input type="radio" name="result-price" value="250"> Up to $250</label>
+          </fieldset>
+          <fieldset data-experience-only><legend>Duration</legend>
+            <label><input type="checkbox" data-filter-duration value="2"> Up to 2 hours</label>
+            <label><input type="checkbox" data-filter-duration value="4"> Over 2–4 hours</label>
+            <label><input type="checkbox" data-filter-duration value="8"> Over 4–under 8 hours</label>
+            <label><input type="checkbox" data-filter-duration value="24"> 8 hours or more</label>
+          </fieldset>
+          <fieldset><legend>Traveler rating</legend>
+            <label><input type="radio" name="result-rating" value="0" checked> Any rating</label>
+            <label><input type="radio" name="result-rating" value="4.5"> 4.5 ★ & up</label>
+            <label><input type="radio" name="result-rating" value="4.8"> 4.8 ★ & up</label>
+          </fieldset>
+          <fieldset><legend>Time of day</legend>
+            <label><input type="checkbox" data-filter-time value="morning"> Morning</label>
+            <label><input type="checkbox" data-filter-time value="afternoon"> Afternoon</label>
+            <label><input type="checkbox" data-filter-time value="evening"> Evening</label>
+          </fieldset>
+          <fieldset><legend>Voyara favorites</legend>
+            <label data-experience-only><input type="checkbox" data-filter-feature value="free-cancel"> Free cancellation</label>
+            <label><input type="checkbox" data-filter-feature value="instant"> Instant confirmation</label>
+            <label data-experience-only><input type="checkbox" data-filter-feature value="pickup"> Hotel pickup</label>
+            <label><input type="checkbox" data-filter-feature value="accessible"> Accessible experience</label>
+            <label><input type="checkbox" data-filter-feature value="local"> Local host</label>
+          </fieldset>
+        </aside><div class="filter-dialog-actions"><button type="button" id="clear-filters">Clear all</button><button class="primary-action" id="apply-filters" type="button">Show results</button></div></dialog>
+  <button class="prototype-notice" id="prototype-notice" aria-live="polite" hidden></button>
+  <footer class="home-footer">
+      <div class="home-footer-content">
+        <div class="home-footer-brand"><a href="#top" aria-label="Voyara, back to top">VOYARA</a><p>Travel deeper. Share freely.</p><span>Island experiences, inspired by people.</span></div>
+        <nav aria-label="Footer navigation" class="home-footer-links">
+          <div><h2>Explore</h2><a href="things-to-do.html">Discover experiences</a><a href="events.html">Trending</a></div>
+          <div><h2>Plan</h2><a href="itineraries.html">Itineraries</a><a href="cruise.html">Arriving by cruise</a><a href="favorites.html">Favourites</a></div>
+          <div><h2>Community</h2><a href="voyagers.html">Meet the Voyagers</a><a href="things-to-do.html?category=guides">Travel guides</a></div>
+          <div><h2>Business</h2><a href="business.html">Voyara for Business</a></div>
+        </nav>
+      </div>
+      <div class="home-footer-bottom"><span>© 2026 Voyara</span><a href="#top">Back to top</a></div>
+    </footer>
+</body>
+</html>

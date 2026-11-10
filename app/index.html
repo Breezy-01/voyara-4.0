@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="VOYARA" />
+<meta name="theme-color" content="#fffdf8" />
+<title>VOYARA — Bahamas excursions & itineraries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#062f35; --muted:#5d7274; --aqua:#00a6a6; --deep-aqua:#007b7c;
+    --coral:#f06f52; --coral-dark:#e15a3c; --sand:#f6f1e7; --cream:#fffdf8;
+    --line:rgba(6,47,53,.12); --line-soft:rgba(6,47,53,.07);
+    --shadow:0 14px 40px rgba(7,57,61,.13); --shadow-sm:0 6px 18px rgba(7,57,61,.08);
+    --tint:#e8f6f3; --tint-2:#b6eee8; --tint-3:#9ff1ea;
+    --coral-tint:#fde7e0; --sand-tint:#f3ecdd; --amber:#c98a23;
+    --serif:Georgia,"Times New Roman",serif;
+    --sans:'Inter',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);color:var(--ink);
+    background:radial-gradient(120% 80% at 50% 0%, #efe7d8 0%, #e3d9c8 60%, #dccfbb 100%);
+    min-height:100vh;display:grid;place-items:center;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.12}
+  img{display:block;max-width:100%}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  small{font-size:.8rem}
+
+  /* ---------- PHONE SHELL ---------- */
+  .phone{position:relative;width:min(420px,100vw);height:min(900px,100vh);background:var(--cream);
+    overflow:hidden;display:flex;flex-direction:column;border-radius:42px;
+    box-shadow:var(--shadow),0 0 0 11px #0a1417,0 0 0 13px #1d2b2e}
+  .notch{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:118px;height:27px;background:#0a1417;border-radius:0 0 16px 16px;z-index:30}
+  .statusbar{flex:none;height:46px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 26px 0 30px;font-size:.82rem;font-weight:600;z-index:20}
+  .statusbar .ico{display:flex;gap:6px;align-items:center}
+  .statusbar .ico svg{width:17px;height:13px}
+
+  .viewport{position:relative;flex:1;overflow:hidden}
+  .screen{position:absolute;inset:0;display:none;flex-direction:column}
+  .screen.active{display:flex}
+  .scr{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+  .scr::-webkit-scrollbar{width:0}
+  .pad{padding-bottom:122px}      /* clear glass nav */
+  .padb{padding-bottom:96px}      /* clear sticky book bar */
+  .px{padding-left:20px;padding-right:20px}
+
+  /* entrance */
+  @keyframes sin{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes fin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .screen.active.push{animation:sin .34s cubic-bezier(.2,.8,.2,1)}
+  .screen.active.fade{animation:fin .34s ease}
+  @media (prefers-reduced-motion:reduce){.screen.active.push,.screen.active.fade{animation:none}}
+
+  /* ---------- SHARED COMPONENTS ---------- */
+  .btn{border-radius:14px;padding:15px;font-weight:600;font-size:.95rem;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;transition:transform .2s,box-shadow .2s,background .2s}
+  .btn:active{transform:scale(.98)}
+  .btn svg{width:18px;height:18px}
+  .btn-coral{background:var(--coral);color:#fff;box-shadow:0 10px 22px rgba(240,111,82,.32)}
+  .btn-coral:active{background:var(--coral-dark)}
+  .btn-aqua{background:var(--deep-aqua);color:#fff;box-shadow:0 10px 22px rgba(0,123,124,.28)}
+  .btn-dark{background:var(--ink);color:#fff}
+  .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .btn-glass{background:var(--tint);color:var(--deep-aqua)}
+  .row{display:flex;gap:10px}
+
+  .topbar{flex:none;display:flex;align-items:center;gap:12px;padding:6px 16px 12px}
+  .topbar .bk{width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--line-soft);display:grid;place-items:center;box-shadow:var(--shadow-sm)}
+  .topbar .bk svg{width:20px;height:20px}
+  .topbar h2{font-size:1.25rem;flex:1}
+  .topbar .act{width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--line-soft);display:grid;place-items:center;box-shadow:var(--shadow-sm)}
+  .topbar .act svg{width:19px;height:19px}
+
+  .eyebrow{font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--deep-aqua)}
+  .sh{display:flex;align-items:baseline;justify-content:space-between;margin:22px 0 12px}
+  .sh h3{font-size:1.3rem}
+  .sh a{font-size:.83rem;font-weight:600;color:var(--deep-aqua)}
+
+  .badge{display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;padding:5px 10px;border-radius:999px}
+  .b-ok{background:var(--tint);color:var(--deep-aqua)}
+  .b-urg{background:var(--coral-tint);color:var(--coral-dark)}
+  .b-amber{background:#f7eed8;color:var(--amber)}
+  .star{display:inline-flex;align-items:center;gap:4px;font-size:.85rem;font-weight:600}
+  .star svg{width:14px;height:14px;color:#f5b301}
+  .heart{width:32px;height:32px;border-radius:50%;background:rgba(255,253,248,.92);display:grid;place-items:center;color:var(--ink)}
+  .heart svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+  .heart.on{color:var(--coral)} .heart.on svg{fill:var(--coral)}
+
+  /* excursion cards */
+  .rail{display:flex;gap:14px;overflow-x:auto;padding:2px 20px 6px;scroll-snap-type:x mandatory}
+  .rail::-webkit-scrollbar{display:none}
+  .ex{flex:none;width:210px;scroll-snap-align:start;background:#fff;border:1px solid var(--line-soft);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm)}
+  .ex .ph,.exl .ph{position:relative;background:linear-gradient(135deg,var(--deep-aqua),var(--aqua))}
+  .ex .ph{height:132px}
+  .ex .ph img,.exl .ph img{width:100%;height:100%;object-fit:cover}
+  .ex .tag,.exl .tag{position:absolute;top:10px;left:10px;background:rgba(255,253,248,.94);color:var(--deep-aqua);font-size:.62rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 9px;border-radius:999px}
+  .ex .heart,.exl .heart{position:absolute;top:9px;right:9px}
+  .ex .b{padding:12px 13px 13px}
+  .ex .loc,.exl .loc{font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:4px;margin-bottom:4px}
+  .ex .loc svg,.exl .loc svg{width:11px;height:11px;color:var(--aqua)}
+  .ex h4{font-size:1rem;line-height:1.2;margin-bottom:9px;min-height:2.4em}
+  .ex .f{display:flex;align-items:center;justify-content:space-between}
+  .price b{color:var(--coral);font-weight:700;font-family:var(--sans)}
+  .price .from{color:var(--muted);font-size:.7rem;font-weight:500}
+  .price .was{color:var(--muted);font-size:.74rem;text-decoration:line-through;margin-right:4px}
+
+  /* list card */
+  .exl{display:flex;gap:0;background:#fff;border:1px solid var(--line-soft);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:13px}
+  .exl .ph{width:120px;flex:none}
+  .exl .b{padding:12px 13px;flex:1;min-width:0;display:flex;flex-direction:column}
+  .exl h4{font-size:1.02rem;line-height:1.2;margin-bottom:5px}
+  .exl .meta{font-size:.74rem;color:var(--muted);display:flex;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .exl .f{margin-top:auto;display:flex;align-items:center;justify-content:space-between}
+
+  /* ===== HOME ===== */
+  .hd{flex:none;display:flex;align-items:center;justify-content:space-between;padding:4px 20px 12px}
+  .hd .loc-sel small{color:var(--muted);font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em}
+  .hd .loc-sel div{display:flex;align-items:center;gap:5px;font-family:var(--serif);font-size:1.32rem;margin-top:1px}
+  .hd .loc-sel svg{width:16px;height:16px;color:var(--coral)}
+  .hgrp{display:flex;gap:10px}
+  .icobtn{position:relative;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid var(--line-soft);display:grid;place-items:center;box-shadow:var(--shadow-sm)}
+  .icobtn svg{width:20px;height:20px}
+  .icobtn .dot{position:absolute;top:10px;right:11px;width:8px;height:8px;border-radius:50%;background:var(--coral);border:2px solid #fff}
+  .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--aqua),var(--deep-aqua));display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--serif);font-size:1.1rem;box-shadow:var(--shadow-sm)}
+  .search{margin:0 20px 16px;background:#fff;border:1px solid var(--line-soft);border-radius:16px;display:flex;align-items:center;gap:11px;padding:14px 16px;color:var(--muted);box-shadow:var(--shadow-sm)}
+  .search svg{width:19px;height:19px;color:var(--aqua);flex:none}
+  .search .mic{margin-left:auto;color:var(--deep-aqua)}
+
+  .cruise{margin:0 20px 18px;border-radius:18px;padding:15px 16px;display:flex;align-items:center;gap:13px;color:#fff;
+    background:linear-gradient(120deg,#0a3f47,#062f35);position:relative;overflow:hidden;box-shadow:var(--shadow-sm)}
+  .cruise::after{content:"";position:absolute;width:140px;height:140px;border-radius:50%;background:rgba(0,166,166,.25);right:-50px;top:-50px}
+  .cruise .ic{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.14);display:grid;place-items:center;flex:none;position:relative;z-index:1}
+  .cruise .ic svg{width:23px;height:23px}
+  .cruise .t{flex:1;position:relative;z-index:1}
+  .cruise .t b{font-weight:600;font-size:.95rem;display:block}
+  .cruise .t small{color:rgba(255,255,255,.75);font-size:.78rem}
+  .cruise .go{position:relative;z-index:1;color:var(--tint-3)}
+  .cruise .go svg{width:20px;height:20px}
+
+  .hcard{position:relative;margin:0 20px 6px;border-radius:20px;overflow:hidden;color:#fff;
+    background:linear-gradient(135deg,var(--aqua),var(--deep-aqua) 70%,#045d5e);box-shadow:0 14px 30px rgba(0,123,124,.32);padding:17px}
+  .hcard::after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.1);top:-60px;right:-44px}
+  .hcard .tp{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+  .hcard .lbl{font-size:.66rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--tint-3)}
+  .hcard .ok{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.18);padding:4px 10px;border-radius:999px;font-size:.7rem;font-weight:600}
+  .hcard .ok .d{width:7px;height:7px;border-radius:50%;background:var(--tint-3)}
+  .hcard h3{color:#fff;font-size:1.45rem;margin:12px 0 5px;position:relative;z-index:1}
+  .hcard .mt{display:flex;gap:14px;color:rgba(255,255,255,.88);font-size:.85rem;position:relative;z-index:1}
+  .hcard .mt span{display:inline-flex;align-items:center;gap:5px} .hcard .mt svg{width:14px;height:14px}
+
+  .qa{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:18px 0 4px}
+  .qa b{display:flex;flex-direction:column;align-items:center;gap:7px;font-weight:500}
+  .qa .ic{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;background:#fff;border:1px solid var(--line-soft);box-shadow:var(--shadow-sm)}
+  .qa .ic svg{width:23px;height:23px}
+  .qa b:nth-child(1) .ic{background:var(--tint);color:var(--deep-aqua)}
+  .qa b:nth-child(2) .ic{background:var(--tint);color:var(--deep-aqua)}
+  .qa b:nth-child(3) .ic{background:var(--coral-tint);color:var(--coral)}
+  .qa b:nth-child(4) .ic{background:var(--sand-tint);color:var(--amber)}
+  .qa small{font-size:.73rem;color:var(--ink)}
+
+  .pills{display:flex;gap:9px;overflow-x:auto;padding:2px 20px 4px}
+  .pills::-webkit-scrollbar{display:none}
+  .pill{flex:none;display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 15px;font-weight:500;font-size:.85rem;white-space:nowrap}
+  .pill.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  /* featured itinerary card */
+  .feat{margin:6px 20px 4px;background:#fff;border:1px solid var(--line-soft);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm)}
+  .feat .ph{position:relative;height:150px;background:linear-gradient(135deg,var(--deep-aqua),var(--aqua))}
+  .feat .ph img{width:100%;height:100%;object-fit:cover}
+  .feat .badge{position:absolute;top:13px;left:13px}
+  .feat .b{padding:15px 16px}
+  .feat h3{font-size:1.3rem;margin:7px 0 11px}
+  .feat .by{display:flex;align-items:center;gap:9px;font-size:.83rem;color:var(--muted)}
+  .feat .by img{width:28px;height:28px;border-radius:50%}
+  .feat .by b{color:var(--ink);font-weight:600}
+  .feat .by .sv{margin-left:auto;display:flex;align-items:center;gap:5px;color:var(--deep-aqua);font-weight:600}
+  .feat .by .sv svg{width:14px;height:14px}
+
+  /* community feed */
+  .post{background:#fff;border:1px solid var(--line-soft);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:16px}
+  .post .hd2{display:flex;align-items:center;gap:10px;padding:12px 14px}
+  .post .hd2 img{width:38px;height:38px;border-radius:50%}
+  .post .hd2 .n b{font-weight:600;font-size:.9rem;display:block}
+  .post .hd2 .n small{color:var(--muted);font-size:.76rem}
+  .post .fl{margin-left:auto;font-size:.8rem;font-weight:600;color:var(--deep-aqua);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+  .post .img{height:200px;background:linear-gradient(135deg,var(--deep-aqua),var(--aqua))}
+  .post .img img{width:100%;height:100%;object-fit:cover}
+  .post .cap{padding:13px 15px}
+  .post .cap h4{font-size:1.15rem;margin-bottom:7px}
+  .post .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px}
+  .post .tags span{font-size:.7rem;background:var(--tint);color:var(--deep-aqua);padding:4px 9px;border-radius:999px}
+  .post .acts{display:flex;align-items:center;gap:18px;color:var(--muted);font-size:.84rem;font-weight:500}
+  .post .acts div{display:flex;align-items:center;gap:6px}
+  .post .acts svg{width:18px;height:18px}
+  .post .acts .clone{margin-left:auto;color:var(--coral);font-weight:600}
+
+  /* excursion detail */
+  .gal{position:relative;height:280px;background:linear-gradient(135deg,var(--deep-aqua),var(--aqua))}
+  .gal img{width:100%;height:100%;object-fit:cover}
+  .gal .top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;z-index:2}
+  .gal .cbtn{width:42px;height:42px;border-radius:50%;background:rgba(255,253,248,.92);display:grid;place-items:center;box-shadow:var(--shadow-sm)}
+  .gal .cbtn svg{width:20px;height:20px}
+  .gal .dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2}
+  .gal .dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55)}
+  .gal .dots i.on{background:#fff;width:18px;border-radius:3px}
+  .det{background:var(--cream);border-radius:22px 22px 0 0;margin-top:-22px;position:relative;padding:20px 20px 0}
+  .det .tags{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+  .det h1{font-size:1.7rem;margin-bottom:8px}
+  .det .sub{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.86rem;margin-bottom:16px;flex-wrap:wrap}
+  .det .sub a{color:var(--deep-aqua);font-weight:600;text-decoration:underline}
+  .trust{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:18px}
+  .trust::-webkit-scrollbar{display:none}
+  .trust .t{flex:none;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line-soft);border-radius:13px;padding:10px 12px;box-shadow:var(--shadow-sm)}
+  .trust .t svg{width:18px;height:18px;color:var(--deep-aqua);flex:none}
+  .trust .t b{font-size:.78rem;font-weight:600;white-space:nowrap}
+  .block{border-top:1px solid var(--line-soft);padding:18px 0}
+  .block h3{font-size:1.18rem;margin-bottom:11px}
+  .inc{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .inc div{display:flex;align-items:center;gap:8px;font-size:.86rem}
+  .inc svg{width:16px;height:16px;color:var(--deep-aqua);flex:none}
+  .times{display:flex;gap:9px;flex-wrap:wrap}
+  .chip{border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:600;font-size:.86rem;text-align:center;background:#fff;position:relative}
+  .chip small{display:block;font-size:.66rem;font-weight:500;color:var(--coral);margin-top:2px}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)} .chip.on small{color:var(--tint-3)}
+  .chip.soldout{opacity:.4}
+  .rev-sum{background:var(--tint);border-radius:14px;padding:14px;margin-bottom:14px;font-size:.88rem;line-height:1.55}
+  .rev-sum .ai{display:inline-flex;align-items:center;gap:6px;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--deep-aqua);margin-bottom:7px}
+  .rev{display:flex;gap:11px;padding:13px 0;border-top:1px solid var(--line-soft)}
+  .rev img{width:38px;height:38px;border-radius:50%;flex:none}
+  .rev .n{font-weight:600;font-size:.88rem} .rev .d{color:var(--muted);font-size:.74rem}
+  .rev p{font-size:.85rem;color:#33484a;margin-top:5px;line-height:1.5}
+
+  .bookbar{flex:none;display:flex;align-items:center;gap:14px;padding:13px 18px calc(14px + env(safe-area-inset-bottom));
+    background:rgba(255,253,248,.9);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+  .bookbar .pr{flex:1}
+  .bookbar .pr b{font-size:1.35rem;color:var(--ink);font-family:var(--sans);font-weight:700}
+  .bookbar .pr small{color:var(--muted);display:block;font-size:.74rem}
+  .bookbar .btn{width:auto;padding:14px 30px}
+
+  /* booking flow */
+  .card{background:#fff;border:1px solid var(--line-soft);border-radius:16px;padding:15px;box-shadow:var(--shadow-sm);margin-bottom:14px}
+  .card .ch{font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .mini{display:flex;gap:12px;align-items:center}
+  .mini img{width:56px;height:56px;border-radius:12px;object-fit:cover;flex:none}
+  .mini b{font-size:.95rem;display:block} .mini small{color:var(--muted)}
+  .week{display:flex;gap:8px}
+  .week .d{flex:1;text-align:center;border:1px solid var(--line);border-radius:12px;padding:9px 0;font-size:.8rem}
+  .week .d small{display:block;color:var(--muted);font-size:.66rem;margin-bottom:3px}
+  .week .d.on{background:var(--ink);color:#fff;border-color:var(--ink)} .week .d.on small{color:var(--tint-3)}
+  .stepper{display:flex;align-items:center;justify-content:space-between}
+  .stepper .lab b{display:block;font-weight:600;font-size:.92rem} .stepper .lab small{color:var(--muted)}
+  .stepper .ct{display:flex;align-items:center;gap:16px}
+  .stepper .ct button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);font-size:1.2rem;display:grid;place-items:center;color:var(--deep-aqua)}
+  .stepper .ct b{min-width:18px;text-align:center;font-weight:600}
+  .addon{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line-soft)}
+  .addon:first-of-type{border-top:none}
+  .addon .ck{width:24px;height:24px;border-radius:7px;border:2px solid var(--line);flex:none;display:grid;place-items:center}
+  .addon.on .ck{background:var(--deep-aqua);border-color:var(--deep-aqua)}
+  .addon .ck svg{width:14px;height:14px;color:#fff;opacity:0} .addon.on .ck svg{opacity:1}
+  .addon .x{flex:1} .addon .x b{font-weight:600;font-size:.9rem;display:block} .addon .x small{color:var(--muted)}
+  .addon .p{font-weight:700;color:var(--coral)}
+  .sum{font-size:.9rem}
+  .sum .l{display:flex;justify-content:space-between;padding:7px 0;color:var(--muted)}
+  .sum .l b{color:var(--ink);font-weight:500}
+  .sum .tot{display:flex;justify-content:space-between;padding-top:12px;margin-top:5px;border-top:1px solid var(--line-soft);font-size:1.05rem}
+  .sum .tot b{font-weight:700}
+  .pay{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin-bottom:11px}
+  .pay svg{width:24px;height:24px} .pay b{font-weight:600;font-size:.9rem;flex:1} .pay .chk{color:var(--deep-aqua)}
+
+  /* confirmation */
+  .conf{text-align:center;padding:30px 24px 0}
+  .conf .tick{width:84px;height:84px;border-radius:50%;background:var(--tint);display:grid;place-items:center;margin:0 auto 18px;animation:pop .5s cubic-bezier(.34,1.56,.4,1)}
+  @keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+  .conf .tick svg{width:42px;height:42px;color:var(--deep-aqua)}
+  .conf h1{font-size:1.8rem;margin-bottom:8px}
+  .conf p{color:var(--muted);font-size:.92rem;margin-bottom:22px}
+  .ticket{background:#fff;border:1px solid var(--line-soft);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;text-align:left;margin-bottom:18px}
+  .ticket .tt{background:var(--ink);color:#fff;padding:15px 18px;display:flex;align-items:center;justify-content:space-between}
+  .ticket .tt b{font-family:var(--serif);font-size:1.1rem} .ticket .tt span{font-size:.72rem;color:var(--tint-3);font-weight:600}
+  .ticket .bd{padding:18px;display:flex;gap:16px;align-items:center}
+  .ticket .qr{width:96px;height:96px;flex:none;border-radius:10px;border:1px solid var(--line-soft);padding:6px;background:#fff}
+  .ticket .info{font-size:.85rem}
+  .ticket .info .l{display:flex;justify-content:space-between;gap:18px;padding:4px 0}
+  .ticket .info .l span{color:var(--muted)} .ticket .info .l b{font-weight:600}
+  .ticket .perf{border-top:2px dashed var(--line);position:relative;text-align:center;padding:11px;font-size:.78rem;color:var(--muted)}
+
+  /* itinerary */
+  .ihero{position:relative;height:230px;background:linear-gradient(135deg,var(--deep-aqua),var(--aqua))}
+  .ihero img{width:100%;height:100%;object-fit:cover}
+  .ihero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,47,53,.7),transparent 55%)}
+  .ihero .top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;z-index:2}
+  .ihero .cbtn{width:42px;height:42px;border-radius:50%;background:rgba(255,253,248,.92);display:grid;place-items:center;box-shadow:var(--shadow-sm)}
+  .ihero .cbtn svg{width:20px;height:20px}
+  .ihero .cap{position:absolute;left:18px;right:18px;bottom:16px;color:#fff;z-index:2}
+  .ihero .cap h1{color:#fff;font-size:1.7rem;margin-top:6px}
+  .istats{display:flex;gap:0;background:#fff;border:1px solid var(--line-soft);border-radius:16px;margin:16px 20px;box-shadow:var(--shadow-sm)}
+  .istats div{flex:1;text-align:center;padding:14px 6px;border-right:1px solid var(--line-soft)}
+  .istats div:last-child{border-right:none}
+  .istats b{font-family:var(--serif);font-size:1.3rem;color:var(--deep-aqua);display:block} .istats small{color:var(--muted);font-size:.74rem}
+  .smart{display:flex;gap:10px;align-items:flex-start;background:var(--tint);border-radius:13px;padding:12px 14px;margin:0 20px 16px;font-size:.84rem;line-height:1.5}
+  .smart svg{width:18px;height:18px;color:var(--deep-aqua);flex:none;margin-top:1px}
+  .daytabs{display:flex;gap:8px;padding:0 20px;margin-bottom:14px}
+  .daytabs button{flex:1;border:1px solid var(--line);border-radius:12px;padding:10px 0;font-weight:600;font-size:.85rem;background:#fff}
+  .daytabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .timeline{padding:0 20px;position:relative}
+  .stop{display:flex;gap:13px;padding-bottom:18px;position:relative}
+  .stop::before{content:"";position:absolute;left:43px;top:36px;bottom:-2px;width:2px;background:var(--line)}
+  .stop:last-child::before{display:none}
+  .stop .tm{flex:none;width:54px;text-align:right;font-size:.74rem;font-weight:600;color:var(--deep-aqua);padding-top:4px}
+  .stop .dotw{flex:none;position:relative;z-index:1}
+  .stop .dotw .o{width:14px;height:14px;border-radius:50%;background:var(--aqua);border:3px solid var(--cream);box-shadow:0 0 0 1px var(--aqua);margin-top:5px}
+  .stop .c{flex:1;background:#fff;border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);display:flex}
+  .stop .c img{width:74px;flex:none;object-fit:cover}
+  .stop .c .cc{padding:10px 12px;flex:1;min-width:0}
+  .stop .c h4{font-size:.96rem;margin-bottom:3px} .stop .c .lc{font-size:.74rem;color:var(--muted);display:flex;align-items:center;gap:4px}
+  .stop .c .lc svg{width:11px;height:11px;color:var(--aqua)}
+  .stop .c .pp{font-size:.8rem;color:var(--coral);font-weight:700;margin-top:5px}
+
+  /* map (stylized) */
+  .map{position:relative;height:100%;background:
+    radial-gradient(circle at 30% 40%, #cfeee9 0 14%, transparent 14%),
+    radial-gradient(circle at 70% 65%, #d9ecd4 0 18%, transparent 18%),
+    linear-gradient(160deg,#e8f4f2,#dcebe6);overflow:hidden}
+  .map::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(6,47,53,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(6,47,53,.05) 1px,transparent 1px);background-size:34px 34px}
+  .map .pin{position:absolute;transform:translate(-50%,-100%);background:var(--coral);color:#fff;font-weight:700;font-size:.74rem;padding:6px 10px;border-radius:999px;box-shadow:0 6px 14px rgba(240,111,82,.4);white-space:nowrap}
+  .map .pin.aqua{background:var(--deep-aqua);box-shadow:0 6px 14px rgba(0,123,124,.4)}
+  .map .pin::after{content:"";position:absolute;left:50%;bottom:-5px;transform:translateX(-50%);border:5px solid transparent;border-top-color:inherit}
+
+  /* search */
+  .filters{display:flex;gap:8px;overflow-x:auto;padding:2px 20px 12px}
+  .filters::-webkit-scrollbar{display:none}
+  .fchip{flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:11px;padding:9px 13px;font-size:.82rem;font-weight:500;background:#fff;white-space:nowrap}
+  .fchip svg{width:14px;height:14px;color:var(--muted)}
+  .fchip.on{background:var(--tint);border-color:var(--aqua);color:var(--deep-aqua)}
+  .toggle{display:flex;background:#eee7da;border-radius:11px;padding:3px;margin:0 20px 14px}
+  .toggle button{flex:1;border-radius:9px;padding:8px;font-weight:600;font-size:.82rem;color:var(--muted)}
+  .toggle button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm)}
+
+  /* profile */
+  .pf-hd{display:flex;flex-direction:column;align-items:center;text-align:center;padding:10px 20px 0}
+  .pf-hd .av{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,var(--aqua),var(--deep-aqua));display:grid;place-items:center;color:#fff;font-family:var(--serif);font-size:2rem;margin-bottom:12px;box-shadow:var(--shadow)}
+  .pf-hd h1{font-size:1.5rem} .pf-hd small{color:var(--muted)}
+  .pf-stats{display:flex;margin:18px 20px;background:#fff;border:1px solid var(--line-soft);border-radius:16px;box-shadow:var(--shadow-sm)}
+  .pf-stats div{flex:1;text-align:center;padding:15px 0;border-right:1px solid var(--line-soft)}
+  .pf-stats div:last-child{border-right:none}
+  .pf-stats b{font-family:var(--serif);font-size:1.4rem;display:block} .pf-stats small{color:var(--muted);font-size:.74rem}
+  .seg{display:flex;background:#eee7da;border-radius:12px;padding:3px;margin:0 20px 16px}
+  .seg button{flex:1;border-radius:9px;padding:9px;font-weight:600;font-size:.82rem;color:var(--muted)}
+  .seg button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm)}
+
+  /* ---------- GLASS TAB BAR ---------- */
+  .tabs{position:absolute;left:14px;right:14px;bottom:calc(12px + env(safe-area-inset-bottom));
+    display:flex;align-items:center;justify-content:space-between;gap:2px;padding:7px 10px;border-radius:30px;z-index:25;
+    background:rgba(255,253,248,.62);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.75),inset 0 0 0 1px rgba(255,255,255,.25),0 0 0 1px rgba(6,47,53,.05),0 14px 34px rgba(7,57,61,.2),0 3px 10px rgba(7,57,61,.12);
+    transition:transform .3s,opacity .3s}
+  .nav-hidden .tabs{transform:translateY(140%);opacity:0;pointer-events:none}
+  .tab-ind{position:absolute;top:6px;left:0;width:0;height:calc(100% - 12px);border-radius:22px;z-index:0;pointer-events:none;
+    background:linear-gradient(160deg,rgba(0,166,166,.22),rgba(0,123,124,.13));box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 4px 12px rgba(0,123,124,.2);
+    transition:left .42s cubic-bezier(.34,1.56,.4,1),width .42s cubic-bezier(.34,1.56,.4,1),opacity .3s}
+  .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:9px 0;color:var(--muted);position:relative;z-index:1;-webkit-tap-highlight-color:transparent;transition:color .25s}
+  .tab svg{width:23px;height:23px;stroke-width:1.9;transition:transform .35s cubic-bezier(.34,1.56,.4,1)}
+  .tab small{font-size:.64rem;font-weight:600}
+  .tab.on{color:var(--deep-aqua)} .tab.on svg{transform:translateY(-1px) scale(1.07)}
+  .tab .bdg{position:absolute;top:3px;right:calc(50% - 21px);background:var(--coral);color:#fff;font-size:.58rem;font-weight:700;min-width:16px;height:16px;border-radius:9px;display:grid;place-items:center;padding:0 4px;border:2px solid #fdf6ee;z-index:2}
+  .tab.book{flex:none;width:62px}
+  .tab.book .fab{width:54px;height:54px;border-radius:50%;margin-top:-32px;margin-bottom:2px;background:radial-gradient(120% 120% at 30% 20%,#ff9173,var(--coral) 55%,var(--coral-dark));color:#fff;display:grid;place-items:center;box-shadow:0 10px 22px rgba(240,111,82,.5),0 0 0 6px rgba(255,253,248,.6),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .3s cubic-bezier(.34,1.56,.4,1)}
+  .tab.book:active .fab{transform:scale(.9)} .tab.book .fab svg{width:25px;height:25px;stroke-width:2.6}
+
+  /* toast */
+  .toast{position:absolute;left:50%;bottom:110px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:14px;font-size:.85rem;font-weight:500;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.3s;z-index:40;display:flex;align-items:center;gap:8px}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast svg{width:17px;height:17px;color:var(--tint-3)}
+
+  /* ---------- BRAND SPLASH ---------- */
+  .splash{position:absolute;inset:0;z-index:70;display:grid;place-items:center;color:var(--cream);
+    background:radial-gradient(120% 90% at 50% 16%, #0a4a52 0%, #062f35 70%);
+    animation:splashOut .7s ease 1.5s forwards}
+  .splash .sp-in{text-align:center;animation:spUp .9s cubic-bezier(.2,.8,.2,1)}
+  .splash .sp-word{font-family:var(--serif);font-weight:400;font-size:2.9rem;letter-spacing:.32em;padding-left:.32em}
+  .splash .wave{margin:16px auto 0;color:var(--tint-3);opacity:.85}
+  .splash .wave svg{width:62px;height:13px}
+  .splash .sp-tag{margin-top:15px;font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;color:var(--tint-3)}
+  .splash.skip{animation:none;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+  @keyframes spUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes splashOut{to{opacity:0;visibility:hidden}}
+  @media (prefers-reduced-motion:reduce){.splash{animation-delay:1s}.splash .sp-in{animation:none}}
+
+  @media (max-width:480px){
+    body{background:var(--cream)}
+    /* full-bleed native app — drop the device frame, notch & faux status bar */
+    .phone{width:100vw;height:100vh;height:100dvh;border-radius:0;box-shadow:none;padding-top:env(safe-area-inset-top)}
+    .notch{display:none}
+    .statusbar{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="phone" id="phone">
+  <div class="splash" id="splash">
+    <div class="sp-in">
+      <div class="sp-word">VOYARA</div>
+      <div class="wave"><svg viewBox="0 0 62 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 7c5-6 10-6 15 0s10 6 15 0 10-6 15 0 10 6 15 0"/></svg></div>
+      <div class="sp-tag">The Bahamas, your way</div>
+    </div>
+  </div>
+  <div class="notch"></div>
+  <div class="statusbar">
+    <span>9:41</span>
+    <span class="ico">
+      <svg viewBox="0 0 24 16" fill="currentColor"><rect x="0" y="9" width="3.5" height="7" rx="1"/><rect x="5.5" y="6" width="3.5" height="10" rx="1"/><rect x="11" y="3" width="3.5" height="13" rx="1"/><rect x="16.5" y="0" width="3.5" height="16" rx="1"/></svg>
+      <svg viewBox="0 0 24 16" fill="currentColor"><path d="M12 3C8 3 4.7 4.4 2.2 6.8l1.6 1.6C5.9 6.3 8.8 5 12 5s6.1 1.3 8.2 3.4l1.6-1.6C19.3 4.4 16 3 12 3z"/><path d="M12 9c-1.6 0-3 .6-4 1.7l1.6 1.6C10.3 11.5 11.1 11 12 11s1.7.5 2.4 1.3l1.6-1.6C15 9.6 13.6 9 12 9z"/></svg>
+      <svg viewBox="0 0 26 16" fill="none"><rect x="1" y="2.5" width="20" height="11" rx="3" stroke="currentColor" stroke-width="1.4"/><rect x="3" y="4.5" width="15" height="7" rx="1.5" fill="currentColor"/><rect x="22.5" y="5.5" width="2" height="5" rx="1" fill="currentColor"/></svg>
+    </span>
+  </div>
+
+  <div class="viewport">
+
+    <!-- ============ HOME ============ -->
+    <section class="screen active fade" id="s-home">
+      <div class="hd">
+        <div class="loc-sel"><small>Exploring</small><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Nassau <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;color:var(--muted)"><path d="M6 9l6 6 6-6"/></svg></div></div>
+        <div class="hgrp">
+          <button class="icobtn"><span class="dot"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg></button>
+          <div class="avatar" data-tab="profile">J</div>
+        </div>
+      </div>
+      <div class="scr pad">
+        <div class="search" data-tab="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><span>Search excursions, islands…</span><svg class="mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 00-3 3v6a3 3 0 006 0V5a3 3 0 00-3-3z"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></div>
+
+        <div class="cruise" data-go="cruise">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 18l1.5-5h15L21 18M5 13V9h9l5 4M9 6h3"/><path d="M2 18c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0"/></svg></div>
+          <div class="t"><b>Arriving by cruise?</b><small>See excursions that fit your port time</small></div>
+          <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span>
+        </div>
+
+        <div class="hcard" data-go="confirm">
+          <div class="tp"><span class="lbl">Your next adventure</span><span class="ok"><span class="d"></span>Confirmed</span></div>
+          <h3>Nassau Reef Snorkel</h3>
+          <div class="mt"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Tomorrow</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>9:00 AM</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>View ticket</span></div>
+        </div>
+
+        <div class="px">
+          <div class="qa">
+            <b data-tab="search"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M16 8l-2 6-6 2 2-6 6-2z"/></svg></span><small>Excursions</small></b>
+            <b data-tab="trips"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg></span><small>Itineraries</small></b>
+            <b data-tab="community"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5a3 3 0 010 6"/></svg></span><small>Voyagers</small></b>
+            <b data-tab="profile"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 8a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M14 6v12" stroke-dasharray="2 2"/></svg></span><small>My Trips</small></b>
+          </div>
+        </div>
+
+        <div class="px"><div class="sh"><h3>Top excursions</h3><a data-tab="search">See all</a></div></div>
+        <div class="rail">
+          <article class="ex" data-go="excursion">
+            <div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=500&q=80" alt=""><span class="tag">Snorkeling</span><span class="heart" data-wish><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></span></div>
+            <div class="b"><div class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Nassau Reef</div><h4>Nassau Reef Snorkel Adventure</h4><div class="f"><div class="price"><span class="from">from </span><b>$89</b></div><div class="star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 7 1-5 4.9 1.2 7L12 17.8 5.8 21l1.2-7-5-4.9 7-1z"/></svg>4.9</div></div></div>
+          </article>
+          <article class="ex" data-go="excursion">
+            <div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1607153333879-c174d265f1d2?auto=format&fit=crop&w=500&q=80" alt=""><span class="tag">Wildlife</span><span class="heart" data-wish><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></span></div>
+            <div class="b"><div class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Blue Lagoon</div><h4>Swim with Dolphins Experience</h4><div class="f"><div class="price"><span class="from">from </span><b>$149</b></div><div class="star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 7 1-5 4.9 1.2 7L12 17.8 5.8 21l1.2-7-5-4.9 7-1z"/></svg>4.8</div></div></div>
+          </article>
+          <article class="ex" data-go="excursion">
+            <div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=500&q=80" alt=""><span class="tag">Cruise</span><span class="heart" data-wish><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></span></div>
+            <div class="b"><div class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Cable Beach</div><h4>Sunset Catamaran Cruise</h4><div class="f"><div class="price"><span class="was">$95</span><b>$79</b></div><div class="star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 7 1-5 4.9 1.2 7L12 17.8 5.8 21l1.2-7-5-4.9 7-1z"/></svg>4.7</div></div></div>
+          </article>
+        </div>
+
+        <div class="px"><div class="sh"><h3>Itinerary of the week</h3><a data-tab="community">Browse</a></div></div>
+        <article class="feat" data-go="itinerary">
+          <div class="ph"><span class="badge b-amber" style="position:absolute;top:13px;left:13px">★ Featured</span><img loading="lazy" src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&w=800&q=80" alt=""></div>
+          <div class="b"><span class="eyebrow">Nassau · Paradise Island</span><h3>Nassau Day-to-Night Escape</h3>
+            <div class="by"><img src="https://i.pravatar.cc/80?img=47" alt=""><span>by <b>@sandy_r</b></span><span class="sv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>88</span></div>
+          </div>
+        </article>
+        <div style="height:8px"></div>
+      </div>
+    </section>
+
+    <!-- ============ SEARCH ============ -->
+    <section class="screen fade" id="s-search">
+      <div class="topbar"><button class="bk" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><h2>Excursions</h2><button class="act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button></div>
+      <div class="filters">
+        <button class="fchip on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Tomorrow</button>
+        <button class="fchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.5-5 6-5"/></svg>2 guests</button>
+        <button class="fchip">Price</button>
+        <button class="fchip">Activity</button>
+        <button class="fchip">Rating 4.5+</button>
+      </div>
+      <div class="toggle"><button class="on" data-view="list">List</button><button data-view="map">Map</button></div>
+      <div class="scr pad" id="search-list" style="padding-left:20px;padding-right:20px">
+        <p style="font-size:.82rem;color:var(--muted);margin-bottom:12px">48 experiences near Nassau</p>
+        <article class="exl" data-go="excursion"><div class="ph" style="width:120px"><img loading="lazy" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=300&q=80" alt=""><span class="heart" data-wish><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></span></div><div class="b"><h4>Nassau Reef Snorkel Adventure</h4><div class="meta"><span class="star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 7 1-5 4.9 1.2 7L12 17.8 5.8 21l1.2-7-5-4.9 7-1z"/></svg>4.9 (218)</span><span>3 hrs</span></div><span class="badge b-urg" style="align-self:flex-start;margin-bottom:8px">🔥 Only 3 spots left</span><div class="f"><div class="price"><span class="from">from </span><b>$89</b></div></div></div></article>
+        <article class="exl" data-go="excursion"><div class="ph" style="width:120px"><img loading="lazy" src="https://images.unsplash.com/photo-1607153333879-c174d265f1d2?auto=format&fit=crop&w=300&q=80" alt=""><span class="heart" data-wish><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></span></div><div class="b"><h4>Swim with Dolphins Experience</h4><div class="meta"><span class="star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 7 1-5 4.9 1.2 7L12 17.8 5.8 21l1.2-7-5-4.9 7-1z"/></svg>4.8 (312)</span><span>4 hrs</span></div><span class="badge b-ok" style="align-self:flex-start;margin-bottom:8px">✓ Free cancellation</span><div class="f"><div class="price"><span class="from">from </span><b>$149</b></div></div></div></article>
+        <article class="exl" data-go="excursion"><div class="ph" style="width:120px"><img loading="lazy" src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=300&q=80" alt=""><span class="heart" data-wish><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></span></div><div class="b"><h4>Sunset Catamaran Cruise</h4><div class="meta"><span class="star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 7 1-5 4.9 1.2 7L12 17.8 5.8 21l1.2-7-5-4.9 7-1z"/></svg>4.7 (189)</span><span>2.5 hrs</span></div><div class="f"><div class="price"><span class="was">$95</span><b>$79</b></div></div></div></article>
+        <article class="exl" data-go="excursion"><div class="ph" style="width:120px"><img loading="lazy" src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=300&q=80" alt=""><span class="heart" data-wish><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></span></div><div class="b"><h4>Exumas Day Trip & Swimming Pigs</h4><div class="meta"><span class="star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 7 1-5 4.9 1.2 7L12 17.8 5.8 21l1.2-7-5-4.9 7-1z"/></svg>5.0 (97)</span><span>Full day</span></div><div class="f"><div class="price"><span class="from">from </span><b>$199</b></div></div></div></article>
+      </div>
+      <div class="scr pad" id="search-map" style="display:none;padding:0">
+        <div class="map" style="height:100%;min-height:480px">
+          <span class="pin" style="left:30%;top:38%">$89</span>
+          <span class="pin aqua" style="left:62%;top:30%">$149</span>
+          <span class="pin" style="left:48%;top:62%">$79</span>
+          <span class="pin aqua" style="left:74%;top:68%">$199</span>
+          <span class="pin" style="left:22%;top:72%">$129</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXCURSION DETAIL ============ -->
+    <section class="screen push" id="s-excursion">
+      <div class="scr padb">
+        <div class="gal">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=80" alt="">
+          <div class="top"><button class="cbtn" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><button class="cbtn" data-wish><span class="heart" style="background:none;width:auto;height:auto"><svg viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></span></button></div>
+          <div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="det">
+          <div class="tags"><span class="badge b-ok">Snorkeling</span><span class="badge b-urg">🔥 Only 3 spots left tomorrow</span></div>
+          <h1>Nassau Reef Snorkel Adventure</h1>
+          <div class="sub"><span class="star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 7 1-5 4.9 1.2 7L12 17.8 5.8 21l1.2-7-5-4.9 7-1z"/></svg>4.9</span><a>218 reviews</a><span>· 3 hours · Nassau Reef</span></div>
+
+          <div class="trust">
+            <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><b>Free cancellation</b></div>
+            <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v5c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V6z"/><path d="M9 12l2 2 4-4"/></svg><b>Verified local operator</b></div>
+            <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg><b>Instant confirmation</b></div>
+          </div>
+
+          <div class="block" style="border-top:none;padding-top:0">
+            <p style="font-size:.92rem;line-height:1.6;color:#2c4346">Glide over Nassau's vibrant coral gardens with a local marine guide. All gear, a glass-bottom boat ride, and fresh fruit included — perfect for first-timers and families.</p>
+          </div>
+
+          <div class="block"><h3>What's included</h3>
+            <div class="inc">
+              <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>All snorkel gear</div>
+              <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Marine guide</div>
+              <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Glass-bottom boat</div>
+              <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Fruit & water</div>
+            </div>
+          </div>
+
+          <div class="block"><h3>Pick a time · Tomorrow</h3>
+            <div class="times">
+              <button class="chip on">9:00 AM<small>3 left</small></button>
+              <button class="chip">12:30 PM</button>
+              <button class="chip">3:00 PM<small>Popular</small></button>
+              <button class="chip soldout">5:30 PM<small>Sold out</small></button>
+            </div>
+          </div>
+
+          <div class="block"><h3>Reviews</h3>
+            <div class="rev-sum"><span class="ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg>AI summary</span>Travelers consistently praise the <b>knowledgeable local guides</b> and crystal-clear water. A few note the boat can get busy on afternoon slots — book the 9 AM for the calmest experience.</div>
+            <div class="rev"><img src="https://i.pravatar.cc/60?img=32" alt=""><div><div class="n">Emma R. <span class="star" style="font-size:.78rem">· <svg viewBox="0 0 24 24" fill="currentColor"></svg>5.0</span></div><div class="d">2 days ago · Verified booking</div><p>"Best part of our trip! Saw a turtle and tons of fish. Our guide Marcus was amazing with the kids."</p></div></div>
+            <div class="rev"><img src="https://i.pravatar.cc/60?img=12" alt=""><div><div class="n">David K.</div><div class="d">1 week ago · Verified booking</div><p>"Super easy booking, instant confirmation, gear was clean and new. Would do again."</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="bookbar"><div class="pr"><small>from</small><b>$89</b> <small>per person</small></div><button class="btn btn-coral" data-go="booking">Check availability</button></div>
+    </section>
+
+    <!-- ============ BOOKING ============ -->
+    <section class="screen push" id="s-booking">
+      <div class="topbar"><button class="bk" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><h2>Book</h2></div>
+      <div class="scr padb px">
+        <div class="card"><div class="mini"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=200&q=80" alt=""><div><b>Nassau Reef Snorkel Adventure</b><small>Nassau Reef · 3 hours</small></div></div></div>
+        <div class="card"><div class="ch">Select date</div>
+          <div class="week"><div class="d"><small>Mon</small>16</div><div class="d on"><small>Tue</small>17</div><div class="d"><small>Wed</small>18</div><div class="d"><small>Thu</small>19</div><div class="d"><small>Fri</small>20</div></div>
+          <div style="display:flex;gap:9px;margin-top:11px"><button class="chip on" style="flex:1">9:00 AM</button><button class="chip" style="flex:1">12:30 PM</button><button class="chip" style="flex:1">3:00 PM</button></div>
+        </div>
+        <div class="card"><div class="ch">Guests</div>
+          <div class="stepper"><div class="lab"><b>Adults</b><small>$89 each</small></div><div class="ct"><button data-step="adult-" >−</button><b id="adults">2</b><button data-step="adult+">+</button></div></div>
+          <div class="stepper" style="margin-top:14px"><div class="lab"><b>Children</b><small>$59 each</small></div><div class="ct"><button data-step="child-">−</button><b id="children">0</b><button data-step="child+">+</button></div></div>
+        </div>
+        <div class="card"><div class="ch">Add-ons</div>
+          <div class="addon on" data-addon="60"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><div class="x"><b>Hotel pickup & drop-off</b><small>Round trip from your hotel</small></div><span class="p">$60</span></div>
+          <div class="addon" data-addon="35"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span><div class="x"><b>GoPro photo package</b><small>All your underwater photos</small></div><span class="p">$35</span></div>
+        </div>
+        <div class="card"><div class="ch">Price details</div>
+          <div class="sum">
+            <div class="l">Adults · <b id="sa">2 × $89</b><b id="sav">$178</b></div>
+            <div class="l">Hotel pickup<b id="addv">$60</b></div>
+            <div class="l">Service fee<b>$14</b></div>
+            <div class="tot">Total <b id="total">$252</b></div>
+          </div>
+          <p style="font-size:.74rem;color:var(--muted);margin-top:8px">All-in price · no hidden fees · free cancellation up to 24h</p>
+        </div>
+        <div class="card"><div class="ch">Payment</div>
+          <div class="pay" style="border-color:var(--ink)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 4a4 4 0 00-3 1.5A4 4 0 0011 4a4.2 4.2 0 00-4 4.3c0 3 2.5 6 5 8.2 2.5-2.2 5-5.2 5-8.2A4 4 0 0017 4z"/></svg><b>Apple Pay</b><span class="chk">●</span></div>
+          <div class="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/></svg><b>•••• 4242</b></div>
+        </div>
+      </div>
+      <div class="bookbar"><div class="pr"><small>Total</small><b id="total2">$252</b></div><button class="btn btn-coral" data-go="confirm">Confirm & Pay</button></div>
+    </section>
+
+    <!-- ============ CONFIRMATION ============ -->
+    <section class="screen push" id="s-confirm">
+      <div class="scr pad px">
+        <div class="conf">
+          <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg></div>
+          <h1>You're booked!</h1>
+          <p>Confirmation sent to jamie@email.com</p>
+        </div>
+        <div class="ticket">
+          <div class="tt"><b>Nassau Reef Snorkel</b><span>E-TICKET</span></div>
+          <div class="bd">
+            <svg class="qr" viewBox="0 0 100 100" shape-rendering="crispEdges"><rect width="100" height="100" fill="#fff"/><g fill="#062f35"><rect x="6" y="6" width="22" height="22"/><rect x="12" y="12" width="10" height="10" fill="#fff"/><rect x="72" y="6" width="22" height="22"/><rect x="78" y="12" width="10" height="10" fill="#fff"/><rect x="6" y="72" width="22" height="22"/><rect x="12" y="78" width="10" height="10" fill="#fff"/><rect x="36" y="8" width="6" height="6"/><rect x="48" y="8" width="6" height="6"/><rect x="36" y="20" width="6" height="6"/><rect x="60" y="14" width="6" height="6"/><rect x="8" y="36" width="6" height="6"/><rect x="20" y="36" width="6" height="6"/><rect x="32" y="34" width="6" height="6"/><rect x="44" y="40" width="6" height="6"/><rect x="56" y="36" width="6" height="6"/><rect x="68" y="34" width="6" height="6"/><rect x="80" y="40" width="6" height="6"/><rect x="88" y="36" width="6" height="6"/><rect x="36" y="48" width="6" height="6"/><rect x="48" y="52" width="6" height="6"/><rect x="60" y="48" width="6" height="6"/><rect x="72" y="52" width="6" height="6"/><rect x="84" y="48" width="6" height="6"/><rect x="36" y="60" width="6" height="6"/><rect x="48" y="64" width="6" height="6"/><rect x="60" y="60" width="6" height="6"/><rect x="36" y="72" width="6" height="6"/><rect x="48" y="76" width="6" height="6"/><rect x="60" y="72" width="6" height="6"/><rect x="72" y="76" width="6" height="6"/><rect x="84" y="72" width="6" height="6"/><rect x="36" y="84" width="6" height="6"/><rect x="60" y="84" width="6" height="6"/><rect x="84" y="84" width="6" height="6"/></g></svg>
+            <div class="info">
+              <div class="l"><span>Date</span><b>Tue, Jun 17</b></div>
+              <div class="l"><span>Time</span><b>9:00 AM</b></div>
+              <div class="l"><span>Guests</span><b>2 adults</b></div>
+              <div class="l"><span>Total</span><b>$252</b></div>
+            </div>
+          </div>
+          <div class="perf">Show this QR code at the dock · Booking #IP-48217</div>
+        </div>
+        <button class="btn btn-coral" data-go="itinerary" style="margin-bottom:11px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add to my itinerary</button>
+        <div class="row" style="margin-bottom:11px"><button class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Calendar</button><button class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>Directions</button></div>
+        <button class="btn btn-glass" data-tab="home">Done</button>
+      </div>
+    </section>
+
+    <!-- ============ ITINERARY ============ -->
+    <section class="screen push" id="s-itinerary">
+      <div class="scr padb">
+        <div class="ihero">
+          <img src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&w=900&q=80" alt="">
+          <div class="top"><button class="cbtn" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><button class="cbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v14"/></svg></button></div>
+          <div class="cap"><span class="badge b-amber">3-day plan</span><h1>Nassau Day-to-Night Escape</h1></div>
+        </div>
+        <div class="px" style="padding-top:14px"><div class="by" style="display:flex;align-items:center;gap:9px;font-size:.85rem;color:var(--muted)"><img src="https://i.pravatar.cc/80?img=47" style="width:30px;height:30px;border-radius:50%" alt=""><span>by <b style="color:var(--ink)">@sandy_r</b></span><span style="margin-left:auto;display:flex;gap:-6px"><img src="https://i.pravatar.cc/40?img=5" style="width:26px;height:26px;border-radius:50%;border:2px solid var(--cream)" alt=""><img src="https://i.pravatar.cc/40?img=8" style="width:26px;height:26px;border-radius:50%;border:2px solid var(--cream);margin-left:-8px" alt=""><span style="width:26px;height:26px;border-radius:50%;background:var(--tint);color:var(--deep-aqua);font-size:.66rem;font-weight:700;display:grid;place-items:center;border:2px solid var(--cream);margin-left:-8px">+4</span></span></div></div>
+        <div class="istats"><div><b>3</b><small>days</small></div><div><b>7</b><small>stops</small></div><div><b>$486</b><small>total</small></div></div>
+        <div class="smart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg><span><b>Smart timing:</b> Your stops are spaced with enough travel time. Day 2's pig beach trip leaves Nassau by 8 AM — we've set a reminder.</span></div>
+
+        <div class="daytabs"><button class="on" data-day="1">Day 1</button><button data-day="2">Day 2</button><button data-day="3">Day 3</button></div>
+        <div class="map" style="height:140px;margin:0 20px 18px;border-radius:16px"><span class="pin aqua" style="left:25%;top:40%">9 AM</span><span class="pin" style="left:55%;top:55%">1 PM</span><span class="pin aqua" style="left:78%;top:35%">6 PM</span></div>
+
+        <div class="timeline" id="day-1">
+          <div class="stop"><div class="tm">9:00 AM</div><div class="dotw"><div class="o"></div></div><div class="c"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=200&q=80" alt=""><div class="cc"><h4>Reef Snorkel</h4><div class="lc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Nassau Reef</div><div class="pp">$89</div></div></div></div>
+          <div class="stop"><div class="tm">1:00 PM</div><div class="dotw"><div class="o"></div></div><div class="c"><img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=200&q=80" alt=""><div class="cc"><h4>Conch lunch · Arawak Cay</h4><div class="lc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Fish Fry</div><div class="pp">$25</div></div></div></div>
+          <div class="stop"><div class="tm">6:00 PM</div><div class="dotw"><div class="o"></div></div><div class="c"><img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=200&q=80" alt=""><div class="cc"><h4>Sunset Catamaran</h4><div class="lc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Cable Beach</div><div class="pp">$79</div></div></div></div>
+        </div>
+      </div>
+      <div class="bookbar"><div class="pr"><small>Book all · save 15%</small><b>$413</b></div><button class="btn btn-coral" id="cloneBtn">Clone & book</button></div>
+    </section>
+
+    <!-- ============ COMMUNITY ============ -->
+    <section class="screen fade" id="s-community">
+      <div class="topbar"><h2 style="font-size:1.5rem;padding-left:6px">Voyagers</h2><button class="act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button></div>
+      <div class="pills"><span class="pill on">For you</span><span class="pill">#Exumas</span><span class="pill">#FamilyTrip</span><span class="pill">#Diving</span><span class="pill">#Foodie</span></div>
+      <div class="scr pad px" style="padding-top:14px">
+        <article class="post" data-go="itinerary">
+          <div class="hd2"><img src="https://i.pravatar.cc/80?img=12" alt=""><div class="n"><b>Marek K.</b><small>@marek_k · 5d ago</small></div><span class="fl">Follow</span></div>
+          <div class="img"><img loading="lazy" src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=800&q=80" alt=""></div>
+          <div class="cap"><h4>Perfect 7-Day Nassau to Exumas</h4><div class="tags"><span>Paradise Island</span><span>Exumas</span><span>Swimming Pigs</span></div>
+            <div class="acts"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 000-7.8z"/></svg>312</div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>28</div><div class="clone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h11a2 2 0 012 2v9M16 17H5a2 2 0 01-2-2V6"/></svg>Clone trip</div></div>
+          </div>
+        </article>
+        <article class="post" data-go="itinerary">
+          <div class="hd2"><img src="https://i.pravatar.cc/80?img=33" alt=""><div class="n"><b>Travel Pete</b><small>@travel_pete · 1w ago</small></div><span class="fl">Follow</span></div>
+          <div class="img"><img loading="lazy" src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80" alt=""></div>
+          <div class="cap"><h4>Family Fun: Kid-Friendly Bahamas</h4><div class="tags"><span>Atlantis</span><span>Blue Lagoon</span><span>Dolphins</span></div>
+            <div class="acts"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 000-7.8z"/></svg>196</div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>14</div><div class="clone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h11a2 2 0 012 2v9M16 17H5a2 2 0 01-2-2V6"/></svg>Clone trip</div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ CRUISE MODE ============ -->
+    <section class="screen push" id="s-cruise">
+      <div class="topbar"><button class="bk" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><h2>Cruise Mode</h2></div>
+      <div class="scr pad px">
+        <div class="cruise" style="margin:0 0 18px"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 18l1.5-5h15L21 18M5 13V9h9l5 4M9 6h3"/><path d="M2 18c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0"/></svg></div><div class="t"><b>Excursions that fit your ship</b><small>Only shows trips you can make in time</small></div></div>
+        <div class="card"><div class="ch">Your cruise</div>
+          <div class="stepper" style="border-bottom:1px solid var(--line-soft);padding-bottom:13px"><div class="lab"><b>Ship</b></div><div style="color:var(--deep-aqua);font-weight:600;font-size:.9rem">Carnival Celebration ▾</div></div>
+          <div class="stepper" style="padding:13px 0;border-bottom:1px solid var(--line-soft)"><div class="lab"><b>Port</b></div><div style="color:var(--deep-aqua);font-weight:600;font-size:.9rem">Nassau ▾</div></div>
+          <div class="stepper" style="padding-top:13px"><div class="lab"><b>In port</b></div><div style="color:var(--deep-aqua);font-weight:600;font-size:.9rem">8:00 AM – 5:00 PM</div></div>
+        </div>
+        <button class="btn btn-aqua" id="cruiseFind" style="margin-bottom:6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Find excursions that fit</button>
+
+        <div id="cruiseResults" style="display:none">
+          <div class="smart" style="margin:18px 0 14px;background:var(--coral-tint)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--coral-dark)"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span style="color:var(--coral-dark)"><b>Your window: 8 AM – 5 PM.</b> Showing trips that return with a 90-min buffer before departure.</span></div>
+          <article class="exl" data-go="excursion"><div class="ph" style="width:120px"><img loading="lazy" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=300&q=80" alt=""></div><div class="b"><span class="badge b-ok" style="align-self:flex-start;margin-bottom:6px">✓ Fits · back by 12:30 PM</span><h4>Nassau Reef Snorkel</h4><div class="meta"><span>🚐 Port pickup included</span></div><div class="f"><div class="price"><span class="from">from </span><b>$89</b></div></div></div></article>
+          <article class="exl" data-go="excursion"><div class="ph" style="width:120px"><img loading="lazy" src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=300&q=80" alt=""></div><div class="b"><span class="badge b-ok" style="align-self:flex-start;margin-bottom:6px">✓ Fits · back by 1:00 PM</span><h4>Catamaran & Beach Break</h4><div class="meta"><span>🚐 Port pickup included</span></div><div class="f"><div class="price"><span class="from">from </span><b>$79</b></div></div></div></article>
+          <article class="exl" style="opacity:.55"><div class="ph" style="width:120px"><img loading="lazy" src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=300&q=80" alt=""></div><div class="b"><span class="badge b-urg" style="align-self:flex-start;margin-bottom:6px">✕ Too long for your window</span><h4>Exumas Full-Day Trip</h4><div class="meta"><span>Returns 6:30 PM</span></div><div class="f"><div class="price"><span class="from">from </span><b>$199</b></div></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROFILE ============ -->
+    <section class="screen fade" id="s-profile">
+      <div class="topbar"><h2 style="font-size:1.5rem;padding-left:6px;flex:1">Profile</h2><button class="act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1l2-1.6-2-3.4-2.4 1a7 7 0 00-1.7-1L14.5 2h-5l-.3 2.6a7 7 0 00-1.7 1l-2.4-1-2 3.4L3.1 11a7 7 0 000 2l-2 1.6 2 3.4 2.4-1a7 7 0 001.7 1l.3 2.4h5l.3-2.6a7 7 0 001.7-1l2.4 1 2-3.4-2-1.6a7 7 0 00.1-1z"/></svg></button></div>
+      <div class="scr pad">
+        <div class="pf-hd"><div class="av">J</div><h1>Jamie Singh</h1><small>@jamie · Nassau explorer 🐚</small></div>
+        <div class="pf-stats"><div><b>4</b><small>Trips</small></div><div><b>23</b><small>Saved</small></div><div><b>312</b><small>Following</small></div></div>
+        <div class="seg"><button class="on" data-seg="trips">My Trips</button><button data-seg="saved">Saved</button><button data-seg="itin">Itineraries</button></div>
+        <div class="px">
+          <div class="hcard" style="margin:0 0 14px" data-go="confirm">
+            <div class="tp"><span class="lbl">Upcoming · tap for ticket</span><span class="ok"><span class="d"></span>Confirmed</span></div>
+            <h3 style="font-size:1.3rem">Nassau Reef Snorkel</h3>
+            <div class="mt"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Tue, Jun 17 · 9:00 AM</span></div>
+          </div>
+          <article class="exl" data-go="itinerary"><div class="ph" style="width:110px"><img loading="lazy" src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&w=300&q=80" alt=""></div><div class="b"><span class="badge b-amber" style="align-self:flex-start;margin-bottom:6px">My itinerary</span><h4>Nassau Day-to-Night Escape</h4><div class="meta"><span>3 days · 7 stops</span></div></div></article>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- toast -->
+  <div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg><span id="toastMsg">Done</span></div>
+
+  <!-- glass tab bar -->
+  <nav class="tabs" id="tabs">
+    <span class="tab-ind" id="ind"></span>
+    <button class="tab on" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><small>Explore</small></button>
+    <button class="tab" data-tab="trips"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg><small>Trips</small></button>
+    <button class="tab book" data-tab="search"><span class="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><small>Book</small></button>
+    <button class="tab" data-tab="community"><span class="bdg">3</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5a3 3 0 010 6M18 20c0-2.5-1-4.2-2.5-5.3"/></svg><small>Voyagers</small></button>
+    <button class="tab" data-tab="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><small>Profile</small></button>
+  </nav>
+</div>
+
+<script>
+  const phone = document.getElementById('phone');
+  const PRIMARY = { home:'home', search:null, trips:'itinerary', community:'community', profile:'profile' };
+  const TAB_OF = { home:'home', search:'search', trips:'trips', community:'community', profile:'profile' };
+  const primaryScreens = ['home','search','trips','community','profile'];
+  let hist = ['home'];
+
+  function showEl(id){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    const el = document.getElementById('s-'+id);
+    if(!el){ return; }
+    el.classList.add('active');
+    const sc = el.querySelector('.scr'); if(sc) sc.scrollTop = 0;
+    // re-trigger entrance animation
+    el.style.animation='none'; void el.offsetWidth; el.style.animation='';
+    const isPrimary = primaryScreens.includes(id);
+    phone.classList.toggle('nav-hidden', !isPrimary);
+    if(isPrimary) setTab(id);
+  }
+  function go(id){
+    // 'trips' tab has no own screen — route to itinerary list-ish (use itinerary)
+    if(id==='trips'){ id='itinerary'; phone.classList.remove('nav-hidden'); }
+    hist.push(id); showEl(id);
+  }
+  function back(){ hist.pop(); showEl(hist[hist.length-1] || 'home'); }
+  function tab(id){
+    if(id==='trips'){ hist=['trips','itinerary']; showEl('itinerary'); phone.classList.remove('nav-hidden'); setTab('trips'); return; }
+    hist=[id]; showEl(id);
+  }
+
+  // glass indicator
+  const ind = document.getElementById('ind');
+  function setTab(screen){
+    const t = TAB_OF[screen] || screen;
+    document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on', b.dataset.tab===t));
+    const active = document.querySelector('.tab.on:not(.book)') || document.querySelector('.tab[data-tab="'+t+'"]');
+    place(active);
+  }
+  function place(tabEl){
+    if(!tabEl||!ind||tabEl.classList.contains('book')){ ind.style.opacity='0'; return; }
+    ind.style.left=(tabEl.offsetLeft+4)+'px'; ind.style.width=(tabEl.offsetWidth-8)+'px'; ind.style.opacity='1';
+  }
+
+  // toast
+  let toastT;
+  function toast(msg){
+    const el=document.getElementById('toast'); document.getElementById('toastMsg').textContent=msg;
+    el.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('show'),1800);
+  }
+
+  // pricing recompute (booking)
+  function recompute(){
+    const a=+document.getElementById('adults').textContent, c=+document.getElementById('children').textContent;
+    let addon=0; document.querySelectorAll('#s-booking .addon.on').forEach(x=>addon+=+x.dataset.addon);
+    const sub=a*89+c*59, fee=14, total=sub+addon+fee;
+    document.getElementById('sa').textContent = a+' × $89'+(c?(' + '+c+' × $59'):'');
+    document.getElementById('sav').textContent = '$'+sub;
+    document.getElementById('addv').textContent = '$'+addon;
+    document.getElementById('total').textContent = '$'+total;
+    document.getElementById('total2').textContent = '$'+total;
+  }
+
+  // delegated events
+  document.addEventListener('click', e=>{
+    const t=e.target;
+    const tabBtn=t.closest('[data-tab]'); if(tabBtn){ tab(tabBtn.dataset.tab); return; }
+    const goEl=t.closest('[data-go]'); if(goEl){ go(goEl.dataset.go); return; }
+    const bk=t.closest('[data-back]'); if(bk){ back(); return; }
+    const w=t.closest('[data-wish]'); if(w){ e.stopPropagation(); w.classList.toggle('on'); toast(w.classList.contains('on')?'Saved to wishlist':'Removed'); return; }
+
+    // search list/map toggle
+    const v=t.closest('[data-view]'); if(v){ document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('on', b===v));
+      document.getElementById('search-list').style.display = v.dataset.view==='list'?'':'none';
+      document.getElementById('search-map').style.display  = v.dataset.view==='map'?'':'none'; return; }
+
+    // booking steppers
+    const st=t.closest('[data-step]'); if(st){ const k=st.dataset.step; const el=document.getElementById(k.startsWith('adult')?'adults':'children');
+      let n=+el.textContent; n += k.endsWith('+')?1:-1; if(k.startsWith('adult')) n=Math.max(1,n); else n=Math.max(0,n); el.textContent=n; recompute(); return; }
+    // addons
+    const ad=t.closest('[data-addon]'); if(ad){ ad.classList.toggle('on'); recompute(); return; }
+    // time/date chips
+    const ch=t.closest('.chip:not(.soldout)'); if(ch){ ch.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('on')); ch.classList.add('on'); return; }
+    const wd=t.closest('.week .d'); if(wd){ wd.parentElement.querySelectorAll('.d').forEach(d=>d.classList.remove('on')); wd.classList.add('on'); return; }
+    // day tabs
+    const dt=t.closest('[data-day]'); if(dt){ dt.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('on')); dt.classList.add('on'); return; }
+    // segmented (profile) just toggles
+    const sg=t.closest('[data-seg]'); if(sg){ sg.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('on')); sg.classList.add('on'); return; }
+    // category pills
+    const pl=t.closest('.pill'); if(pl){ pl.parentElement.querySelectorAll('.pill').forEach(p=>p.classList.remove('on')); pl.classList.add('on'); return; }
+    // follow
+    if(t.closest('.fl')){ const f=t.closest('.fl'); f.textContent = f.textContent==='Following'?'Follow':'Following'; return; }
+    // clone
+    if(t.closest('#cloneBtn')){ toast('Trip cloned to your account'); setTimeout(()=>go('booking'),700); return; }
+    // cruise find
+    if(t.closest('#cruiseFind')){ document.getElementById('cruiseResults').style.display='block'; t.closest('#cruiseFind').scrollIntoView({behavior:'smooth',block:'start'}); return; }
+  });
+
+  // brand splash — tap to skip (CSS auto-dismisses as a fallback)
+  const splash = document.getElementById('splash');
+  if (splash){
+    splash.addEventListener('click', ()=>splash.classList.add('skip'));
+    setTimeout(()=>{ if(splash) splash.style.display='none'; }, 2600);
+  }
+
+  // init
+  showEl('home');
+  window.addEventListener('load', ()=>setTab('home'));
+  window.addEventListener('resize', ()=>{ const on=document.querySelector('.tab.on'); if(on && !on.classList.contains('book')) place(on); });
+</script>
+</body>
+</html>

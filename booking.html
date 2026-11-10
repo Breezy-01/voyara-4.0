@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head><script src="demo-account.js?v=business1"></script><script src="booking-records.js"></script><script src="recovery-states.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Book Your Experience | Voyara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <link rel="stylesheet" href="styles.css?v=multi1">
+  <link rel="stylesheet" href="prototype.css">
+  <link rel="stylesheet" href="booking.css?v=app-flow1">
+  <link rel="stylesheet" href="booking-app-flow.css?v=1">
+  <script src="booking.js?v=schedule1" defer></script>
+<link rel="stylesheet" href="checkout-design.css?v=multi-match2"><script src="checkout-design.js?v=multi1" defer></script><link rel="stylesheet" href="ui-consistency.css?v=1">
+<link rel="stylesheet" href="mobile-booking-polish.css">
+<link rel="stylesheet" href="recovery-states.css"><link rel="stylesheet" href="checkout-review.css"><script src="checkout-review.js?v=multi1" defer></script><link rel="stylesheet" href="visual-polish.css"><link rel="stylesheet" href="islandly-theme.css"><link rel="stylesheet" href="mobile-usability.css"><link rel="stylesheet" href="alignment-polish.css?v=16"><link rel="stylesheet" href="trip-plan.css?v=food1"><script src="trip-plan.js?v=cruise1" defer></script><script src="multi-checkout.js?v=schedule1" defer></script></head>
+<body class="prototype-page booking-prototype">
+  <header class="checkout-header"><a href="index.html"><img src="assets/voyara-logo.png" alt="Voyara home"></a><a id="checkout-back" href="things-to-do.html">Back to experience</a><span>Local checkout preview</span></header>
+
+  <section class="booking-banner"><div class="page-shell"><p class="eyebrow">MAKE IT A DAY TO REMEMBER</p><h1>Book your <em>island experience.</em></h1><p>Review your plans and get ready for your island day.</p></div></section>
+
+  <main class="page-shell app-booking-main">
+    <nav class="booking-progress" aria-label="Checkout sections"><a href="#date-heading">1. Your plans</a><a href="#checkout-account">2. Your details</a><a href="#review-heading">3. Review & confirm</a></nav>
+    <section class="checkout-mobile-summary" aria-label="Current booking"><div><strong id="mobile-booking-title"></strong><span id="mobile-booking-schedule"></span><span id="mobile-booking-guests"></span></div><a href="#price-heading"><small>Total</small><strong id="mobile-booking-total"></strong><span>View details</span></a></section>
+    <div class="booking-layout">
+      <section class="booking-panel app-booking-panel">
+        <div class="selected-experience"><img id="booking-image" alt=""><div><span class="listing-badge" id="booking-category">EXPERIENCE</span><h2 id="booking-title"></h2><p id="booking-location"></p></div></div>
+
+        <section class="booking-card" aria-labelledby="date-heading"><p class="booking-card-label" id="date-heading">Select date</p><div class="booking-fields app-date-field"><label>Date<input id="booking-date" type="date" required></label></div><div class="time-options" id="time-options"><button class="time-option selected" data-time="9:00 AM">9:00 AM</button><button class="time-option" data-time="12:30 PM">12:30 PM</button><button class="time-option" data-time="3:00 PM">3:00 PM</button></div></section>
+
+        <section class="booking-card" aria-labelledby="guests-heading"><p class="booking-card-label" id="guests-heading">Guests</p><div class="app-guest-row" data-booking-traveler="adults"><span><strong>Adults</strong><small>18+ · <b id="adult-unit-price"></b> each</small></span><div><button type="button" data-booking-quantity="-1" aria-label="Remove adult">−</button><strong>2</strong><button type="button" data-booking-quantity="1" aria-label="Add adult">+</button></div></div><div class="app-guest-row" data-booking-traveler="kids"><span><strong>Children</strong><small>0–17 · <b id="child-unit-price"></b> each</small></span><div><button type="button" data-booking-quantity="-1" aria-label="Remove child">−</button><strong>0</strong><button type="button" data-booking-quantity="1" aria-label="Add child">+</button></div></div><p class="booking-age-note">Adults includes every traveler aged 18 or older.</p></section>
+
+        <section class="booking-card" id="checkout-account" aria-labelledby="account-heading">
+          <h2 class="booking-card-label" id="account-heading">Your details</h2>
+          <div class="checkout-tabs" role="tablist" aria-label="Checkout method"><button type="button" role="tab" id="guest-tab" aria-selected="true" aria-controls="guest-panel">Guest checkout</button><button type="button" role="tab" id="signin-tab" aria-selected="false" aria-controls="signin-panel" tabindex="-1">Sign in</button></div>
+          <div id="guest-panel" role="tabpanel" aria-labelledby="guest-tab"><p>Continue without creating an account.</p><div class="checkout-contact"><label>Full name<input id="checkout-name" autocomplete="name" placeholder="Your full name" required></label><label>Email address<input id="checkout-email" type="email" autocomplete="email" placeholder="you@example.com" required></label></div><small>Design preview: use sample details. No email will be sent.</small></div>
+          <div id="signin-panel" role="tabpanel" aria-labelledby="signin-tab" hidden><h3>Keep your plans together</h3><p>Signed-in guests can find tickets and saved plans in their account.</p><button type="button" class="preview-signin" id="preview-signin">Sign in to your account</button><p id="signin-status" role="status">Use your local demo account, or continue as a guest.</p></div>
+        </section>
+        <section class="booking-card" aria-labelledby="addons-heading"><p class="booking-card-label" id="addons-heading">Add-ons</p><label class="app-addon"><input type="checkbox" name="addon" value="35" data-addon-name="GoPro photo package"><span class="addon-check">✓</span><span><strong>GoPro photo package</strong><small>All your underwater photos</small></span><b>$35</b></label></section>
+
+        <section class="booking-card price-card" aria-labelledby="price-heading"><p class="booking-card-label" id="price-heading">Price details</p><div class="app-price-lines"><div><span id="adult-price-label">Adults</span><strong id="adult-price-total">$0</strong></div><div id="child-price-row"><span id="child-price-label">Children</span><strong id="child-price-total">$0</strong></div><div><span>Add-ons</span><strong id="summary-addons">$0</strong></div><div><span>Service fee</span><strong>$14</strong></div><div class="grand"><span>Total</span><strong id="summary-total">$0</strong></div></div><p>Sample pricing · includes the service fee shown above</p></section>
+
+        <section class="booking-card waiver-card" id="activity-waiver" hidden aria-labelledby="waiver-heading"><h2 class="booking-card-label" id="waiver-heading">Before your activity</h2><h3>Activity waiver</h3><p>For water activities, the partner’s safety information and waiver will appear here before checkout.</p><details><summary>Preview the waiver section</summary><p>This is a layout placeholder, not a legal waiver. The partner-approved document, participant requirements and acceptance record still need to be connected.</p></details><label class="waiver-check"><input type="checkbox" id="waiver-check"> I have reviewed this sample safety section.</label></section>
+        <section class="booking-card" aria-labelledby="payment-heading"><p class="booking-card-label" id="payment-heading">Payment</p><label class="app-payment selected"><input type="radio" name="payment" value="Apple Pay" checked><span>●</span><strong>Apple Pay · preview</strong><i>●</i></label><label class="app-payment"><input type="radio" name="payment" value="Prototype card"><span>▣</span><strong>Test card · 4242</strong><i>●</i></label><p class="prototype-warning">Prototype only. No payment information is transmitted.</p></section>
+
+        <section class="booking-card checkout-review" aria-labelledby="review-heading">
+          <div class="review-heading"><div><span>ONE LAST LOOK</span><h2 id="review-heading">Review your booking</h2></div><span class="review-preview">Sample booking</span></div>
+          <h3 id="review-title"></h3>
+          <dl class="review-details">
+            <div><dt>Date & time</dt><dd id="review-schedule"></dd><button type="button" data-review-edit="booking-date">Edit<span class="sr-only"> date and time</span></button></div>
+            <div><dt>Guests</dt><dd id="review-guests"></dd><button type="button" data-review-edit="guests-heading">Edit<span class="sr-only"> guests</span></button></div>
+            <div><dt>Your details</dt><dd id="review-contact"></dd><button type="button" data-review-edit="checkout-account">Edit<span class="sr-only"> your details</span></button></div>
+            <div><dt>Payment preview</dt><dd id="review-payment"></dd><button type="button" data-review-edit="payment-heading">Edit<span class="sr-only"> payment preview</span></button></div>
+          </dl>
+          <div class="review-prices" id="review-prices"></div>
+          <div class="review-total"><span>Sample total <small>Includes service fee</small></span><strong id="review-total"></strong></div>
+          <p class="review-note">No payment will be taken. This creates a sample ticket in this browser.</p>
+        </section>
+        <label class="booking-terms"><input id="terms-check" type="checkbox"> I understand this is a sample booking with no payment or reservation.</label>
+        <p id="checkout-error" class="checkout-error" role="alert" hidden></p><div class="app-confirm-bar"><div><small>Total</small><strong id="confirm-total">$0</strong></div><button class="next-step" id="confirm-booking">Confirm preview booking</button></div>
+      </section>
+
+      <aside class="booking-summary"><p class="eyebrow">YOUR BOOKING</p><h2>Trip summary</h2><div class="summary-experience"><img id="summary-image" alt=""><div><strong id="summary-title"></strong><small id="summary-schedule"></small></div></div><div class="summary-lines"><div><span>Adults</span><strong id="summary-adults"></strong></div><div><span>Children</span><strong id="summary-children"></strong></div><div><span>Add-ons</span><strong id="side-addons"></strong></div><div><span>Service fee</span><strong>$14</strong></div><div class="grand"><span>Total</span><strong id="side-total"></strong></div></div><p class="secure-note">Design preview only. No payment is processed and no reservation is made.</p></aside>
+    </div>
+  </main>
+</body>
+</html>

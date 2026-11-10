@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head><script src="demo-account.js?v=business1"></script><script src="booking-records.js"></script><script src="recovery-states.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Prabh's Voyager Profile | Voyara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <link rel="stylesheet" href="styles.css?v=multi1">
+  <link rel="stylesheet" href="prototype.css?v=explore-modal1">
+  <script src="prototype.js?v=business2" defer></script>
+<link rel="stylesheet" href="ui-consistency.css?v=1">
+<link rel="stylesheet" href="navigation-design.css"><script src="navigation-design.js?v=exclusive-menus1" defer></script><link rel="stylesheet" href="recovery-states.css"><link rel="stylesheet" href="visual-polish.css"><link rel="stylesheet" href="islandly-theme.css"><link rel="stylesheet" href="mobile-usability.css"><script src="social-model.js" defer></script><script src="social-local.js" defer></script><link rel="stylesheet" href="social-local.css"><link rel="stylesheet" href="alignment-polish.css?v=16"><link rel="stylesheet" href="voyager-profile-design.css?v=1"></head>
+<body class="prototype-page voyager-social-page voyager-profile-page">
+  <header class="header voyager-top-header">
+    <a class="brand" href="index.html"><img src="assets/voyara-logo.png" alt="Voyara"></a>
+    <button class="menu-button">☰</button>
+    <nav class="nav"><a href="index.html">Discover</a><a href="events.html">Trending</a><a href="itineraries.html">Itineraries</a><a class="active" href="voyagers.html">Voyagers</a></nav>
+    <div class="header-actions"><button class="line-icon-button" aria-label="Saved voyages"><span class="heart-icon">♡</span></button><a class="line-icon-button" href="itineraries.html" aria-label="Trips"><span class="bag-icon"></span></a><a class="avatar-button" href="voyager-profile.html"><img src="assets/header-avatar.png" alt="Profile"></a></div>
+  </header>
+
+  <aside class="voyager-rail" aria-label="Voyara community navigation">
+    <nav>
+      <a href="index.html"><span class="rail-icon">⌂</span><span>Discover</span></a>
+      <a href="voyagers.html"><span class="rail-icon">▣</span><span>Voyagers</span></a>
+      <a href="voyagers.html"><span class="rail-icon">⌕</span><span>Search</span></a>
+      <button type="button" data-create-post><span class="rail-icon">＋</span><span>Create</span></button>
+      <a class="active" href="voyager-profile.html"><img class="rail-avatar" src="assets/header-avatar.png" alt=""><span>Profile</span></a>
+    </nav>
+    <button class="rail-more" type="button" data-notify="More community settings are coming soon."><span>☰</span><span>More</span></button>
+  </aside>
+
+  <main class="voyager-profile-main"><div class="voyager-profile-heading"><div><p>YOUR ISLAND STORY</p><h2>My Voyager profile</h2></div><a href="voyagers.html">Back to Voyagers →</a></div>
+    <section class="profile-overview">
+      <div class="profile-photo-wrap"><img src="assets/header-avatar.png" alt="Prabh's profile photo"><button data-notify="Profile note editing will be added in the next prototype.">Add a note…</button></div>
+      <div class="profile-details">
+        <div class="profile-name-row"><h1>prabh.voyages</h1><button aria-label="Profile settings" data-notify="Profile settings are not connected in this local preview."><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="8" cy="7" r="3" fill="white"/><circle cx="16" cy="17" r="3" fill="white"/></svg></button></div>
+        <p class="profile-display-name">Prabh</p>
+        <div class="profile-stats"><button><strong>6</strong> voyages</button><button data-notify="Follower lists are sample data; viewing them is not connected yet."><strong>698</strong> followers</button><button data-notify="Following lists are sample data; viewing them is not connected yet."><strong>531</strong> following</button></div>
+        <div class="profile-bio"><strong>Traveler · Creator</strong><span>Toronto ↔ The Bahamas</span><p>Finding the best island days, local tables and sunset views. ✈️</p><a href="#voyager-panel-posts">View my voyages</a></div>
+        <div class="profile-islandly-status"><span>✦</span><div><strong>Voyara Castaway</strong><small>385 stars · 115 to Explorer status</small></div><a href="#voyager-panel-posts">View voyages</a></div>
+      </div>
+    </section>
+
+    <div class="profile-actions"><button data-edit-profile>Edit profile</button><button data-view-archive>View archive</button></div>
+
+    <section class="profile-content">
+      <div class="profile-tabs" role="tablist"><button class="active" data-profile-tab="posts"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Voyages</span></button><button data-profile-tab="saved"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span>Saved</span></button><button data-profile-tab="tagged"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="17" rx="3"/><circle cx="12" cy="10" r="3"/><path d="M7 19a5 5 0 0 1 10 0"/></svg><span>Tagged</span></button></div>
+      <div class="profile-panel active" data-profile-panel="posts">
+        <div class="profile-post-grid">
+          <button style="background-image:url('https://images.unsplash.com/photo-1544550285-f813152fb2fd?auto=format&fit=crop&w=700&q=84')" data-profile-post><span>♥ 314&nbsp;&nbsp; ◯ 28</span></button>
+          <button style="background-image:url('https://images.pexels.com/photos/17908376/pexels-photo-17908376.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-profile-post><span>♥ 226&nbsp;&nbsp; ◯ 19</span></button>
+          <button style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=88')" data-profile-post><span>♥ 243&nbsp;&nbsp; ◯ 17</span></button>
+          <button style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=84')" data-profile-post><span>♥ 189&nbsp;&nbsp; ◯ 12</span></button>
+          <button style="background-image:url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1400&q=88')" data-profile-post><span>♥ 176&nbsp;&nbsp; ◯ 21</span></button>
+          <button style="background-image:url('https://images.unsplash.com/photo-1519671282429-b44660ead0a7?auto=format&fit=crop&w=700&q=84')" data-profile-post><span>♥ 154&nbsp;&nbsp; ◯ 9</span></button>
+        </div>
+      </div>
+      <div class="profile-panel" data-profile-panel="saved"><div class="profile-empty"><span><i class="profile-bookmark-icon large" aria-hidden="true"></i></span><h2>Your saved island inspiration</h2><p>Voyages and guides you save from Voyagers will appear here.</p><a href="voyagers.html">Explore the community</a></div></div>
+      <div class="profile-panel" data-profile-panel="tagged"><div class="profile-empty"><span>▣</span><h2>Voyages featuring you</h2><p>When Voyagers tag you, those voyages will appear here.</p></div></div>
+    </section>
+  </main>
+
+  <nav class="voyager-mobile-nav" aria-label="Mobile navigation"><a href="index.html">⌂</a><a href="voyagers.html">▣</a><button data-create-post>＋</button><a href="events.html">◇</a><a class="active" href="voyager-profile.html"><img src="assets/header-avatar.png" alt="Profile"></a></nav>
+
+  <div class="modal" id="edit-profile-modal"><div class="modal-card"><button class="modal-close" aria-label="Close profile editor" data-close-profile>×</button><p class="eyebrow">VOYAGER PROFILE</p><h2>Edit profile</h2><form class="prototype-form" id="edit-profile-form"><label>Display name<input name="displayName" value="Prabh"></label><label>Home base<input name="homeBase" value="Toronto ↔ The Bahamas"></label><label class="wide">Bio<textarea name="bio" rows="4">Finding the best island days, local tables and sunset views.</textarea></label><button class="primary-action wide">Save changes</button></form></div></div>
+  <div class="modal voyager-create-modal" id="create-post-modal"><div class="modal-card"><button class="modal-close" data-close-create>×</button><p class="eyebrow">NEW VOYAGE</p><h2>Share your voyage</h2><form class="prototype-form" id="create-post-form"><label>Photo<input name="photo" type="file" accept="image/*" required></label><label>Caption<textarea name="caption" rows="4" placeholder="Share a recommendation or island moment…" required></textarea></label><label>Location<input name="location" placeholder="Nassau, The Bahamas" required></label><label>Voyage type<select name="type"><option>Travel moment</option><option>Guide</option><option>Itinerary</option><option>Event</option></select></label><button class="primary-action wide">Share voyage</button></form></div></div>
+  <button class="prototype-notice" id="prototype-notice" aria-live="polite" hidden></button>
+</body>
+</html>

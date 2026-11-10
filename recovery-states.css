@@ -1,0 +1,12 @@
+body[class] .recovery-state{max-width:680px;margin:64px auto;padding:48px 28px;text-align:center;border:1px solid #d6e2dc;border-radius:22px;background:#f6f1e7;color:#062f35}
+body[class] .recovery-symbol{display:inline-grid;place-items:center;width:64px;height:64px;border-radius:50%;background:#e5eee6;color:#527e70;font-size:36px}
+body[class] .recovery-state h1{font:400 36px/1.2 Georgia,Georgia,serif;margin:24px 0 16px;letter-spacing:-.5px}
+body[class] .recovery-state p{max-width:450px;margin:0 auto 28px;color:#5d7274;font:16px/1.7 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body[class] .recovery-action{display:inline-flex;align-items:center;justify-content:center;background:#007b7c;color:white;border-radius:12px;min-height:48px;padding:12px 24px;font:600 15px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-decoration:none}
+body[class] .recovery-home{display:block;width:fit-content;margin:24px auto 0;color:#315d59;font-size:14px;text-decoration:underline;text-underline-offset:4px}
+body[class] .recovery-state a:focus-visible{outline:3px solid #52ac9e;outline-offset:4px}
+body[class] img.image-unavailable{object-fit:contain;background:#e8efea}
+@media(max-width:600px){body[class] .recovery-state{margin:32px 16px;padding:36px 22px}body[class] .recovery-state h1{font-size:30px}}
+body[class] :is(#empty-state,#voyager-empty){border:1px dashed #c5d7cd;border-radius:20px;background:#f6f1e7;padding:36px 24px;text-align:center;color:#062f35}
+body[class] :is(#empty-state,#voyager-empty) p{font-size:15px;line-height:1.6;color:#5d7274}
+body[class] :is(#empty-state,#voyager-empty) button{min-height:44px;padding:12px 20px;border:0;border-radius:12px;background:#007b7c;color:white;font:600 14px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}

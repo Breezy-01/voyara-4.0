@@ -1,0 +1,31 @@
+@page{size:A4 portrait;margin:15mm}
+html{background:white!important}
+body.confirmation-page{margin:0!important;background:white!important;color:#172c30!important;font-family:Inter,ui-sans-serif,system-ui,sans-serif!important}
+.confirmation-page .ticket-header,.confirmation-page .ticket-wallet,.confirmation-page .confirmation-actions,.confirmation-page #ticket-share-dialog,.confirmation-page .ticket-map{display:none!important}
+.confirmation-page .confirmation-wrap{padding:0!important;display:block!important}
+.confirmation-page .confirmation-card{width:100%!important;max-width:180mm!important;margin:0 auto!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
+.confirmation-page .confirmation-top{padding:0 0 5mm!important;background:white!important;color:#172c30!important;border-bottom:2px solid #315e60;break-inside:avoid}
+.confirmation-page .confirmation-top::before{content:'VOYARA / SAMPLE TICKET';display:block;font:bold 11pt Inter,ui-sans-serif,system-ui,sans-serif;letter-spacing:2px;margin-bottom:5mm}
+.confirmation-page .confirmation-top .eyebrow,.confirmation-page .confirmation-top>p:not(.eyebrow){display:none!important}
+.confirmation-page .confirmation-top h1{font:normal 22pt Georgia,serif!important;line-height:1.2!important;margin:0 0 4mm!important;color:#172c30!important}
+.confirmation-page .confirmation-number{display:inline-block!important;padding:2mm 3mm!important;margin:0!important;border:1px solid #809491;border-radius:3px;background:white!important;color:#172c30!important;font:bold 11pt Inter,ui-sans-serif,system-ui,sans-serif!important;overflow-wrap:anywhere}
+.confirmation-page .confirmation-content{padding:6mm 0 0!important}
+.confirmation-page .confirmation-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:3mm!important;break-inside:avoid}
+.confirmation-page .confirmation-stat{padding:3mm!important;background:white!important;border:1px solid #c3ceca;border-radius:4px}
+.confirmation-page .confirmation-stat span{display:block;font:9pt Inter,ui-sans-serif,system-ui,sans-serif!important;color:#4a5d5e!important;margin-bottom:2mm}
+.confirmation-page .confirmation-stat strong{display:block;font:bold 10pt/1.4 Inter,ui-sans-serif,system-ui,sans-serif!important;color:#172c30!important;overflow-wrap:anywhere}
+.confirmation-page .ticket{display:block!important;margin:6mm 0 0!important;padding:6mm!important;border:1px solid #a6bab5;border-radius:5px;break-inside:auto}
+.confirmation-page .ticket>div:first-child{break-inside:avoid}
+.confirmation-page .ticket .eyebrow{font:bold 9pt Inter,ui-sans-serif,system-ui,sans-serif!important;letter-spacing:1px;color:#315e60!important;margin:0 0 3mm}
+.confirmation-page .ticket h2{font:normal 21pt/1.2 Georgia,serif!important;margin:0 0 3mm!important;overflow-wrap:anywhere}
+.confirmation-page .ticket #ticket-subtitle{font:10pt/1.5 Inter,ui-sans-serif,system-ui,sans-serif!important;color:#4a5d5e!important;margin:0 0 5mm}
+.confirmation-page .ticket dl{margin:0!important}
+.confirmation-page .ticket dl div{display:grid!important;grid-template-columns:25mm minmax(0,1fr)!important;gap:4mm!important;padding:3mm 0!important;border-bottom:1px solid #d7dfdc;break-inside:avoid}
+.confirmation-page .ticket dt{font:10pt/1.5 Inter,ui-sans-serif,system-ui,sans-serif!important;color:#4a5d5e!important}
+.confirmation-page .ticket dd{font:bold 11pt/1.5 Inter,ui-sans-serif,system-ui,sans-serif!important;margin:0!important;color:#172c30!important;overflow-wrap:anywhere}
+.confirmation-page .ticket-preview-note{font:bold 9pt/1.5 Inter,ui-sans-serif,system-ui,sans-serif!important;background:white!important;color:#172c30!important;border:1px solid #a6bab5!important;padding:3mm!important;margin:5mm 0!important;break-inside:avoid}
+.confirmation-page .ticket-entry{display:block!important;padding:4mm 0 0!important;border-top:1px dashed #a6bab5;break-inside:avoid}
+.confirmation-page .qr-preview{display:none!important}
+.confirmation-page .ticket-entry strong{font:bold 10pt Inter,ui-sans-serif,system-ui,sans-serif!important}
+.confirmation-page .ticket-entry p{font:9pt/1.5 Inter,ui-sans-serif,system-ui,sans-serif!important;margin:2mm 0;color:#4a5d5e!important}
+.confirmation-page .ticket-entry small{font:bold 9pt Inter,ui-sans-serif,system-ui,sans-serif!important;color:#172c30!important}

@@ -1,0 +1,6 @@
+(() => {
+const group=new URLSearchParams(location.search).get('trip'),records=window.VoyaraBookings.all().filter(x=>x.groupId===group),root=document.querySelector('#plan-content');
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+if(!group||!records.length){root.innerHTML='<section class="plan-card"><h2>Trip not found in this browser</h2><p>Open Upcoming trips to find your saved bookings.</p></section>';return;}
+root.innerHTML=`<section class="plan-card"><h2>${records.length} individual tickets</h2><p><a href="trip-review.html">View day-by-day plan and unbooked food stops →</a></p>${records.map(b=>`<article class="plan-item"><img src="${esc(b.item.image)}" alt=""><div><h3>${esc(b.item.title)}</h3><p>${esc(b.item.date)} · ${esc(b.item.time)}</p><p>${esc(window.VoyaraBookings.status(b))} · $${Number(b.total).toFixed(2)}${b.serviceFee?' · includes $14 service fee':''}</p></div><a class="plan-button" href="booking-confirmation.html?booking=${encodeURIComponent(b.number)}">View ticket</a></article>`).join('')}<p class="plan-day-total">Original checkout total <strong>$${records.reduce((s,b)=>s+Number(b.total),0).toFixed(2)}</strong></p></section>`;
+})();

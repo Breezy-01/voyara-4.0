@@ -1,0 +1,101 @@
+.home-page .hero{height:auto!important;min-height:540px;padding-bottom:36px!important}
+.home-page .hero-content{position:relative}
+.home-page .hero-weather-summary{position:absolute;right:0;top:38px;display:grid;grid-template-columns:64px 1fr;column-gap:20px;row-gap:16px;width:310px;max-width:100%;padding:24px;margin:0;border:1px solid #ffffff52;border-radius:20px;background:linear-gradient(135deg,#276479bd,#234f3db8);box-shadow:0 12px 30px #001e2926;backdrop-filter:blur(9px);color:#fff}
+.home-page .hero-weather-summary svg{width:64px;height:64px;stroke:#ffda62;stroke-width:3;fill:#ffda62;align-self:center}
+.home-page .hero-weather-reading{display:flex;flex-direction:column;gap:3px}.home-page .hero-weather-reading>span{font:500 23px/1.2 Georgia,serif}.home-page .hero-weather-reading strong{font:400 54px/1.1 Georgia,serif}.home-page .hero-weather-summary p{grid-column:1/-1;margin:0;font:400 16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.home-page .cruise-discovery-card,.home-page #open-happenings{background-color:#007b7cb8;background-image:linear-gradient(135deg,#00a6a6bd 0%,#007b7cbd 70%,#045d5ec4 100%);color:#fff;border:1px solid #ffffff36;box-shadow:0 8px 24px #001e2920;backdrop-filter:blur(3px)}
+.home-page .cruise-discovery-card{height:auto;min-height:54px;padding:9px 18px;display:flex;justify-content:center;gap:12px;border-radius:14px;margin-top:12px;box-sizing:border-box}
+.home-page .cruise-discovery-icon{width:30px;height:30px;background:none;border-radius:0;flex-shrink:0}.home-page .cruise-discovery-icon svg{width:26px;height:26px}
+.home-page .cruise-discovery-copy{flex-direction:row;align-items:center;gap:8px;flex-wrap:wrap}.home-page .cruise-discovery-copy strong{font-size:14px}.home-page .cruise-discovery-copy small{font-size:14px;color:#fff;line-height:1.4}
+.home-page .happenings-invite{position:absolute;right:0;top:258px;padding:0;width:310px;display:flex}
+.home-page #open-happenings{width:100%;border-radius:14px;min-height:54px;padding:12px 18px;font:600 17px/1.4 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;display:flex;align-items:center;justify-content:center;gap:12px}
+.home-page #open-happenings svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7}
+@media(min-width:1000px){.home-page .hero h1{max-width:calc(100% - 340px)}}
+@media(max-width:999px){.home-page .hero-weather-summary{position:static;width:280px;margin:0 0 24px;padding:18px;grid-template-columns:48px 1fr;gap:10px 16px}.home-page .hero-weather-summary svg{width:48px;height:48px}.home-page .hero-weather-reading strong{font-size:42px}.home-page .hero-weather-reading>span{font-size:20px}.home-page .hero-weather-summary p{font-size:14px}.home-page .happenings-invite{position:static;width:min(760px,100%);margin-top:12px}.home-page #open-happenings{width:auto;min-width:230px}.home-page .cruise-discovery-copy{gap:2px 8px}.home-page .cruise-discovery-copy small{font-size:12px}.home-page .cruise-discovery-card{min-height:54px}}
+
+/* Preserve the original responsive search dimensions and align the cruise banner. */
+.home-page .hero-content .cruise-discovery-card{width:min(752px,60vw)}
+.home-page .hero-weather-summary{background:linear-gradient(135deg,#27647955,#234f3d45);backdrop-filter:blur(4px);border-color:#ffffff40;box-shadow:0 8px 24px #001e2915}
+.home-page .hero-weather-summary svg{fill:none;stroke:#fff2bc;stroke-width:2.4}
+.home-page .hero-content .happenings-invite{position:absolute;top:14px;left:50%;right:auto;transform:translateX(-50%);width:auto;margin:0;padding:0;z-index:4}
+.home-page .hero-content #open-happenings{width:46px;min-width:46px;height:46px;min-height:46px;padding:10px;border-radius:50px;gap:0;overflow:hidden;transition:width .22s ease,padding .22s ease;white-space:nowrap}
+.home-page #open-happenings svg{width:24px;height:24px;flex:0 0 24px}
+.home-page #open-happenings .happenings-label{max-width:0;opacity:0;overflow:hidden;transition:opacity .18s ease,max-width .22s ease,margin .22s ease}
+.home-page .hero-content #open-happenings:is(:hover,:focus-visible){width:224px;padding:10px 16px}
+.home-page #open-happenings:is(:hover,:focus-visible) .happenings-label{max-width:180px;opacity:1;margin-left:10px}
+@media(min-width:641px) and (max-width:1199px){.home-page .hero-content .cruise-discovery-card{width:min(760px,100%)}}
+@media(max-width:640px){.home-page .hero-content .cruise-discovery-card{width:100%}.home-page .hero-content .happenings-invite{top:12px}.home-page .hero-content{padding-top:72px!important}}
+@media(prefers-reduced-motion:reduce){.home-page .hero-content #open-happenings,.home-page #open-happenings .happenings-label{transition:none}}
+@media(min-width:1200px){.home-page .hero-content .cruise-discovery-card{width:min(800px,57vw)}}
+@media(min-width:641px) and (max-width:1199px){.home-page .hero-content .cruise-discovery-card{width:100%}}
+/* Balanced hero with an optional upcoming booking beside the main introduction. */
+.home-page .hero-content{display:grid!important;grid-template-columns:minmax(0,1fr) 310px;column-gap:40px;row-gap:24px;padding-top:64px!important}
+.home-page .hero-content>h1{grid-column:1;grid-row:1;align-self:center;margin:0!important;max-width:none}
+.home-page .hero-weather-summary{position:static;grid-column:2;grid-row:1;width:100%;margin:0}
+.home-page .hero-voyage{grid-column:2;grid-row:2;padding:20px 24px;border:1px solid #ffffff42;border-radius:18px;background:linear-gradient(135deg,#175a6490,#103e4199);backdrop-filter:blur(6px);color:white}
+.home-page .hero-voyage[hidden]{display:none}
+.home-page .hero-voyage-kicker{font-size:10px;font-weight:700;letter-spacing:1.5px;color:#c3eee3}
+.home-page .hero-voyage h2{font:400 23px/1.25 Georgia,serif;margin:10px 0}
+.home-page .hero-voyage p{font-size:12px;line-height:1.6;margin:0 0 12px;color:#eef6f1}
+.home-page .hero-voyage a{display:inline-flex;min-height:44px;align-items:center;font-size:14px;font-weight:600;color:white;text-decoration:underline;text-underline-offset:4px}
+.home-page .hero-content .search-bar{grid-column:1/-1;grid-row:2;margin-top:8px;max-width:100%}
+.home-page .hero-content .cruise-discovery-card{grid-column:1/-1;grid-row:3;margin-top:-12px;max-width:100%}
+.home-page .hero-content.has-voyage .search-bar{grid-row:3}
+.home-page .hero-content.has-voyage .cruise-discovery-card{grid-row:4}
+.home-page .hero-content.has-voyage>h1{grid-row:1/3;align-self:center}
+@media(max-width:700px){.home-page .hero-content{grid-template-columns:1fr;gap:20px;padding-top:76px!important}.home-page .hero-content>h1,.home-page .hero-content.has-voyage>h1{grid-column:1;grid-row:1}.home-page .hero-weather-summary{grid-column:1;grid-row:2;width:100%}.home-page .hero-voyage{grid-column:1;grid-row:3}.home-page .hero-content .search-bar{grid-row:3}.home-page .hero-content .cruise-discovery-card{grid-row:4}.home-page .hero-content.has-voyage .search-bar{grid-row:4}.home-page .hero-content.has-voyage .cruise-discovery-card{grid-row:5}}
+/* Keep the introduction and discovery controls on the left, account cards on the right. */
+@media(min-width:1000px){
+.home-page .hero-content{grid-template-columns:minmax(0,1fr) 280px;column-gap:32px;row-gap:24px;padding-top:64px!important}
+.home-page .hero-content>h1,.home-page .hero-content.has-voyage>h1{grid-column:1;grid-row:1;align-self:start;font-size:clamp(42px,4.5vw,64px)}
+.home-page .hero-weather-summary{grid-column:2;grid-row:1;padding:20px;column-gap:14px}
+.home-page .hero-content .search-bar,.home-page .hero-content.has-voyage .search-bar{grid-column:1;grid-row:2;width:100%;margin:16px 0 0;align-self:start}
+.home-page .hero-content .cruise-discovery-card,.home-page .hero-content.has-voyage .cruise-discovery-card{grid-column:1;grid-row:3;width:55%;min-width:280px;justify-self:start;margin:0;align-self:start}
+.home-page .hero-voyage{grid-column:2;grid-row:2/4;align-self:start}
+.home-page .cruise-discovery-copy{flex-direction:column;align-items:flex-start;gap:3px}.home-page .cruise-discovery-copy small{font-size:12px}
+.home-page .hero-content .search-bar{grid-template-columns:minmax(120px,1.25fr) minmax(130px,1.1fr) minmax(80px,.7fr) minmax(90px,.8fr) 72px}
+.home-page .hero-content .home-search-modes button{padding:8px 7px;font-size:12px}
+}
+@media(min-width:701px) and (max-width:999px){.home-page .hero-content>h1,.home-page .hero-content.has-voyage>h1{grid-row:1;align-self:start}.home-page .hero-content .cruise-discovery-card{width:55%;min-width:280px}}
+@media(max-width:700px){.home-page .hero-content .cruise-discovery-card{width:78%;min-width:0;justify-self:start}}
+/* Cruise strip: full search width, slimmer vertical profile. */
+.home-page .hero-content .cruise-discovery-card,.home-page .hero-content.has-voyage .cruise-discovery-card{width:100%;min-width:0;min-height:32px;height:auto;padding:4px 12px;gap:8px;border-radius:10px;margin-top:-12px}
+.home-page .cruise-discovery-icon{width:22px;height:22px}
+.home-page .cruise-discovery-icon svg{width:22px;height:22px}
+.home-page .cruise-discovery-copy{flex-direction:row;align-items:center;gap:6px}
+.home-page .cruise-discovery-copy strong{font-size:12px}
+.home-page .cruise-discovery-copy small{font-size:12px;line-height:1.35}
+@media(max-width:700px){.home-page .hero-content .cruise-discovery-card{min-height:44px;margin-top:-8px}.home-page .cruise-discovery-copy{gap:1px 6px}.home-page .cruise-discovery-copy small{font-size:11px}}
+
+/* Leave more of the hero photo visible above the discovery controls. */
+.home-page .hero-content .search-bar,
+.home-page .hero-content.has-voyage .search-bar{margin-top:80px}
+@media(max-width:700px){
+ .home-page .hero-content .search-bar,
+ .home-page .hero-content.has-voyage .search-bar{margin-top:32px}
+}
+/* Keep discovery controls in the same rows whether an upcoming trip is present or not. */
+@media(min-width:1000px){
+ .home-page .hero-content{grid-template-rows:auto 154px 44px;row-gap:24px}
+ .home-page .hero-content .search-bar,.home-page .hero-content.has-voyage .search-bar{grid-row:2;align-self:start}
+ .home-page .hero-content .cruise-discovery-card,.home-page .hero-content.has-voyage .cruise-discovery-card{grid-row:3;align-self:start;min-height:44px;margin-top:0}
+ .home-page .hero-voyage{grid-row:2/4;min-height:0;max-height:100%;overflow:auto;box-sizing:border-box}
+}
+@media(max-width:999px){
+ .home-page .hero-content>h1,.home-page .hero-content.has-voyage>h1{grid-row:1}
+ .home-page .hero-content .hero-weather-summary{grid-row:2}
+ .home-page .hero-content .search-bar,.home-page .hero-content.has-voyage .search-bar{grid-row:3}
+ .home-page .hero-content .cruise-discovery-card,.home-page .hero-content.has-voyage .cruise-discovery-card{grid-row:4}
+ .home-page .hero-content .hero-voyage{grid-row:5;grid-column:1/-1}
+}
+@media(min-width:701px) and (max-width:999px){.home-page .hero-content{grid-template-columns:minmax(0,1fr)}.home-page .hero-content .hero-weather-summary{grid-column:1;width:310px}.home-page .hero-content>h1,.home-page .hero-content.has-voyage>h1{grid-column:1}}
+/* At small desktop widths the existing search fields need the full content width. */
+@media(min-width:1000px) and (max-width:1199px){
+ .home-page .hero-content .search-bar,.home-page .hero-content.has-voyage .search-bar,
+ .home-page .hero-content .cruise-discovery-card,.home-page .hero-content.has-voyage .cruise-discovery-card{grid-column:1/-1}
+ .home-page .hero-content .hero-voyage{grid-row:4;grid-column:1/-1;width:100%;max-height:none}
+}
+@media(min-width:701px) and (max-width:999px){
+ .home-page .hero-content .search-bar{grid-template-columns:minmax(130px,1.2fr) minmax(210px,1.1fr) minmax(80px,.8fr) minmax(80px,.8fr) 72px}
+ .home-page .hero-content .home-search-modes button{font-size:12px;padding:8px 6px}
+}

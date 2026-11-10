@@ -1,0 +1,31 @@
+:root{--ink:#062f35;--muted:#5d7274;--aqua:#00a6a6;--deep-aqua:#007b7c;--sand:#f6f1e7;--cream:#fffdf8;--coral:#f06f52;--control-font:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--control-ink:#062f35;--control-active:#007b7c;--control-tint:#e2f5f1;--teal:#007b7c;--cyan:#00a6a6}
+@media screen{
+body[class]{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fffdf8;color:#062f35}
+body[class] :is(button,input,select,textarea){font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+body[class] :is(h1,h2,h3){font-family:Georgia,'Times New Roman',serif}
+body[class] .header.unified-navigation{background:#213b40!important;border-bottom:1px solid #ffffff24;backdrop-filter:blur(18px)}
+body[class] .header.unified-navigation .nav a,body[class] .header.unified-navigation button{color:#fffdf8!important}
+body[class] .header.unified-navigation .nav a[aria-current=page]{border-color:#00a6a6}
+body[class] .header.unified-navigation .brand img{filter:drop-shadow(0 0 1px #062f35)}
+body.home-page .hero h1 em{color:#b6eee8}
+body[class] :is(.primary-action,.collection-cta,.recovery-action,.search-submit){background:#007b7c;color:#fff}
+body[class] :is(.page-hero,.collection-empty,.recovery-state){background:#f6f1e7}
+body[class] :is(.eyebrow,.route-eyebrow,.collection-eyebrow){color:#007b7c}
+body.home-page .cruise-discovery-card,body.home-page #open-happenings{background-image:linear-gradient(135deg,#00a6a6cf,#007b7cd9)}
+body[class] .listing-badge{background:#e2f5f1;color:#007b7c}
+}
+@media screen{body[class] .header.unified-navigation .brand{background:transparent}body[class] .header.unified-navigation .brand img{filter:none}body[class] .header.unified-navigation .header-actions svg{color:#fffdf8;stroke:#fffdf8}body[class] .header.unified-navigation .heart-icon{color:#fffdf8!important}}
+@media screen{body[class] .header.unified-navigation .brand::after{display:none}}
+
+/* Match the Islandly source typography, including inherited controls and labels. */
+@media screen{
+body[class],body[class] :is(p,span,small,label,input,select,textarea,button,dt,dd,li){font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body[class] :is(h1,h2,h3),body[class] :is(h1,h2,h3) :is(a,span,em,strong){font-family:Georgia,"Times New Roman",serif!important}
+body[class] h1{font-weight:400!important}
+body.home-page .hero-content>h1{font-family:Georgia,"Times New Roman",serif!important;font-weight:400!important;font-size:clamp(52px,5.8vw,82px)!important;line-height:.95!important;letter-spacing:-3px!important}
+body.home-page .hero-content>h1 em{font-family:Georgia,"Times New Roman",serif!important;font-weight:400!important}
+body[class] :is(.weather-temperature strong,.hero-weather-reading strong,.hero-weather-reading>span){font-family:Georgia,"Times New Roman",serif!important;font-weight:400}
+@media(max-width:700px){body.home-page .hero-content>h1{font-size:clamp(42px,11vw,60px)!important;letter-spacing:-2px!important;line-height:1!important}}
+}
+
+@media screen{body[class] .header.unified-navigation .auth-account-menu button{color:#062f35!important}}

@@ -1,0 +1,35 @@
+/* Card presentation adapted from voyara-app.vercel.app/voyagers.
+   Existing post controls and local social handlers remain in place. */
+body.voyager-social-page .voyager-feed{width:100%;max-width:760px;gap:22px}
+body.voyager-social-page .social-post{display:flex;flex-direction:column;border:1px solid #e3e5df;border-radius:16px;background:#fff;box-shadow:0 2px 3px #062f3512;overflow:hidden;padding:0}
+body.voyager-social-page .social-post-head{height:auto;min-height:76px;padding:14px 16px;gap:11px;order:0}
+body.voyager-social-page .social-post-head img{width:38px;height:38px;border-radius:50%;object-fit:cover}
+body.voyager-social-page .social-post-head strong{font-size:14px;line-height:1.4}
+body.voyager-social-page .social-post-head span{font-size:12px;line-height:1.5;color:#6d7b7c}
+body.voyager-social-page .social-post-image{order:1;aspect-ratio:16/10!important;width:100%;height:auto;min-height:0;border-radius:0;background-position:center;background-size:cover}
+body.voyager-social-page .social-post-copy{order:2;padding:17px 16px 8px}
+body.voyager-social-page .voyage-tile-title{font:400 23px/1.3 Georgia,serif;margin:0 0 8px;color:#062f35}
+body.voyager-social-page .voyage-tile-location{display:block;color:#6d7b7c;font-size:12px;margin-bottom:10px}
+body.voyager-social-page .social-post-copy>p{font-size:14px;line-height:1.6;margin:0 0 12px}
+body.voyager-social-page .post-chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 12px}
+body.voyager-social-page .post-chips a{display:inline-flex;align-items:center;min-height:30px;padding:5px 11px;border-radius:999px;background:#e8f5f3;color:#32666a;font-size:12px;text-decoration:none}
+body.voyager-social-page .post-chips a:nth-child(3n+2){background:#f5f0e3}
+body.voyager-social-page .post-chips a:nth-child(3n){background:#fcebe3;color:#a45a43}
+body.voyager-social-page .social-post-actions{order:3;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:8px 16px 16px;min-height:60px}
+body.voyager-social-page .social-post-actions>div{display:flex;align-items:center;gap:2px}
+body.voyager-social-page .social-post-actions .like-count{font-size:12px;font-weight:500;white-space:nowrap;margin:0 8px 0 0;color:#5d7274}
+body.voyager-social-page .social-post-actions .voyage-tile-end{margin-left:auto;gap:8px}
+body.voyager-social-page .voyage-tile-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 18px;border-radius:999px;background:#eb795d;color:#fff;text-decoration:none;font-size:13px;font-weight:700;box-shadow:0 5px 12px #eb795d30}
+body.voyager-social-page .voyage-tile-link:hover{background:#ce6046}
+body.voyager-social-page .social-comment-form{order:4;padding:12px 16px;margin:0!important;border-top:1px solid #edf1f0}
+@media(max-width:650px){body.voyager-social-page .voyager-feed{padding:0 12px;box-sizing:border-box}body.voyager-social-page .voyage-tile-title{font-size:21px}body.voyager-social-page .social-post-actions{padding:8px 12px 12px}body.voyager-social-page .social-post-image{aspect-ratio:16/10!important}body.voyager-social-page .voyage-tile-link{padding:10px 13px}}
+
+body.voyager-social-page .social-post-actions{height:auto!important;flex-shrink:0}
+/* Center the tagged-person glyph independently of native button padding. */
+body.voyager-social-page .post-tag{display:flex;align-items:center;justify-content:center;padding:0;border:0;line-height:1}
+body.voyager-social-page .post-tag svg{width:22px;height:22px;flex:none;margin:0;transform:translateY(-1px)}
+/* Filtering and archived posts must take precedence over the flex card layout. */
+body.voyager-social-page .social-post.hidden-post,body.voyager-social-page .social-post[hidden]{display:none!important}
+
+body.voyager-social-page .voyage-tile-title a{color:inherit;text-decoration:none}
+body.voyager-social-page .voyage-tile-title a:hover{text-decoration:underline}

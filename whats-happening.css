@@ -1,0 +1,21 @@
+.home-page .happenings-invite{display:flex;justify-content:center;padding:18px 16px 0}
+#open-happenings{display:inline-flex;align-items:center;gap:10px;min-height:44px;border:1px solid #bdd3cb;border-radius:24px;padding:10px 18px;color:#007b7c;background:#edf5ef;font:600 14px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer}
+#open-happenings svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+body.happenings-open{overflow:hidden}
+#whats-happening{box-sizing:border-box;width:min(580px,calc(100% - 32px));max-height:calc(100dvh - 48px);padding:0;border:1px solid #d5e3db;border-radius:24px;background:#fffdf8;color:#062f35;box-shadow:0 24px 90px #082c3940;overflow:auto;overscroll-behavior:contain}
+#whats-happening::backdrop{background:#12363c80;backdrop-filter:blur(4px)}
+.happenings-heading{position:relative;padding:28px 66px 18px 28px;background:#eaf3ed}
+.happenings-heading>span{font:700 10px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.14em;color:#007b7c}
+.happenings-heading h2{font:400 34px/1.15 Georgia,serif;margin:12px 0 8px;letter-spacing:-.025em}
+.happenings-heading p{font:400 14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:0;color:#5d7274}
+.happenings-heading button{position:absolute;right:16px;top:16px;width:44px;height:44px;border:1px solid #c8d6d2;border-radius:50%;background:#fffdf8;color:#062f35;font-size:26px;cursor:pointer}
+.happenings-list{padding:8px 24px}
+.happenings-card{display:grid;grid-template-columns:98px minmax(0,1fr);gap:16px;align-items:center;padding:16px 0;color:inherit;text-decoration:none;border-bottom:1px solid #e0e8e2}
+.happenings-card:last-child{border-bottom:0}.happenings-card img{width:98px;height:110px;object-fit:cover;border-radius:12px}
+.happenings-date{font:600 12px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#007b7c}.happenings-card h3{font:600 17px/1.3 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:7px 0 5px}.happenings-card p{font:400 13px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#5d7274;margin:0 0 5px}.happenings-card small{font:500 12px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#5d7274}
+.happenings-footer{position:sticky;bottom:0;background:#fffdf8;border-top:1px solid #e0e8e2;padding:16px 24px 20px;display:flex;flex-wrap:wrap;gap:10px}
+.happenings-footer a,.happenings-footer button{box-sizing:border-box;display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:24px;padding:12px 20px;font:600 14px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}
+.happenings-footer a{flex:1;background:#007b7c;color:white;border:1px solid #007b7c}.happenings-footer button{background:white;color:#007b7c;border:1px solid #c8d6d2}.happenings-footer p{width:100%;font:400 11px/1.4 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#60766a;margin:0}
+#whats-happening :is(a,button):focus-visible,#open-happenings:focus-visible{outline:3px solid #00a6a6;outline-offset:3px}.happenings-card:hover h3{text-decoration:underline;text-underline-offset:3px}.happenings-empty{font:400 15px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+@media(max-width:600px){#whats-happening{width:100%;max-width:100%;max-height:88dvh;margin:auto 0 0;border-radius:24px 24px 0 0;border-bottom:0}.happenings-heading{padding:24px 62px 18px 20px}.happenings-heading h2{font-size:29px}.happenings-list{padding:0 20px}.happenings-card{grid-template-columns:80px minmax(0,1fr);gap:13px;padding:14px 0}.happenings-card img{width:80px;height:102px}.happenings-card h3{font-size:15px}.happenings-footer{padding:14px 20px calc(16px + env(safe-area-inset-bottom))}.happenings-footer a,.happenings-footer button{font-size:13px;padding:12px 16px}}
+@media print{.happenings-invite,#whats-happening{display:none!important}}

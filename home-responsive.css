@@ -1,0 +1,287 @@
+/* Stable responsive homepage layout. This file intentionally loads after legacy styles. */
+.home-page{overflow-x:hidden}
+.home-page main{min-width:0}
+.home-page .hero-content,.home-page .hero-side-cards,.home-page .community-layout,.home-page .post-grid,.home-page .guides,.home-page .creator-row{min-width:0}
+.home-page .community-section,.home-page .creators-section{width:min(1600px,100%)}
+.home-page .creator-row{max-width:100%}
+
+/* Full desktop: preserve the approved side-by-side composition without overlap. */
+@media (min-width:1200px){
+  .home-page .hero{height:540px;min-height:540px}
+  .home-page .hero-content{width:min(1450px,calc(100% - 72px));padding-top:46px!important;padding-right:min(47vw,620px)}
+  .home-page .hero h1{font-size:clamp(46px,4.25vw,60px)}
+  .home-page .search-bar,.home-page .cruise-discovery-card{width:min(752px,51vw)}
+  .home-page .hero-side-cards{top:72px;right:max(36px,calc((100vw - 1450px)/2));width:min(540px,44vw);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .home-page .hero-side-cards .share-card,.home-page .home-weather-card{width:100%;min-width:0}
+  .home-page .next-adventure-card h2{white-space:normal}
+}
+
+/* Smaller desktops and tablets: keep the same content order in a clean stacked hero. */
+@media (min-width:641px) and (max-width:1199px){
+  .home-page .header{height:68px;padding:0 28px;display:grid;grid-template-columns:180px minmax(0,1fr) auto;gap:18px}
+  .home-page .header .brand{display:flex}
+  .home-page .header .nav{display:flex;gap:clamp(14px,2vw,28px);font-size:11px}
+  .home-page .header .menu-button{display:none}
+  .home-page .header .header-actions{display:flex;gap:9px!important}
+  .home-page .header-actions>.line-icon-button,.home-page .header-actions>.favorites-trigger,.home-page .header-actions>.trip-cart-trigger{flex-basis:30px!important;width:30px!important}
+  .home-page .hero{height:auto;min-height:790px;padding-bottom:36px;background-position:center}
+  .home-page .hero-shade{background:linear-gradient(90deg,#011421df,#02212b85 62%,#01142142),linear-gradient(0deg,#00121aaf,transparent 40%)}
+  .home-page .hero-content{display:block;width:min(920px,calc(100% - 56px));padding:44px 0 0!important}
+  .home-page .hero h1{font-size:clamp(46px,6vw,58px)}
+  .home-page .search-bar,.home-page .cruise-discovery-card{width:min(760px,100%)}
+  .home-page .hero-side-cards{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:min(920px,calc(100% - 56px));margin:28px auto 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .home-page .hero-side-cards .share-card,.home-page .home-weather-card{position:relative;inset:auto;width:100%;height:230px;padding:25px;border-radius:18px}
+  .home-page .next-adventure-card h2{white-space:normal}
+  .home-page .community-section{padding:34px 4% 0;overflow:visible}
+  .home-page .community-section>.section-title{display:flex}
+  .home-page .community-layout{grid-template-columns:1fr;gap:26px}
+  .home-page .post-grid{display:grid;position:static;height:auto;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;overflow:visible}
+  .home-page .post-card,.home-page .post-card:nth-child(3){display:block;position:relative;right:auto;width:auto;height:330px;transform:none}
+  .home-page .guides{padding:0;border-left:0}
+  .home-page .guides-scroll{height:auto;max-height:370px}
+  .home-page .guides article{height:86px;grid-template-columns:118px minmax(0,1fr) 48px}
+}
+
+/* Phone: every component becomes a normal document-flow block. */
+@media (max-width:640px){
+  .home-page .header{height:64px;padding:0 16px}
+  .home-page .brand img{width:145px!important;height:38px!important}
+  .home-page .hero{height:auto;min-height:0;padding:0 0 24px;background-position:58% center;overflow:hidden}
+  .home-page .hero-shade{background:linear-gradient(0deg,#001420d9 0%,#0014205e 72%,#00142042)}
+  .home-page .hero-content{display:block;width:calc(100% - 32px);padding:38px 0 0!important}
+  .home-page .hero h1{font-size:clamp(38px,11vw,47px);line-height:1.01}
+  .home-page .hero-content>p{margin:14px 0 20px!important;font-size:15px;line-height:1.4}
+  .home-page .search-bar{width:100%;height:auto;display:grid;grid-template-columns:1fr;padding:5px 13px 12px;border-radius:18px}
+  .home-page .search-bar label{display:flex;min-height:66px;padding:8px 9px;border-right:0;border-bottom:1px solid var(--line)}
+  .home-page .search-bar label:nth-of-type(3){border-bottom:0}
+  .home-page .search-bar small{font-size:10px}
+  .home-page .search-bar input,.home-page .search-bar select{font-size:13px}
+  .home-page .search-submit{width:100%;height:46px;margin:7px 0 0;border-radius:12px}
+  .home-page .cruise-discovery-card{width:100%;height:auto;min-height:88px;margin-top:16px;padding:11px 14px;grid-template-columns:50px minmax(0,1fr) 20px;gap:12px}
+  .home-page .cruise-discovery-copy strong{font-size:14px}.home-page .cruise-discovery-copy small{font-size:10px;line-height:1.35}
+  .home-page .hero-side-cards{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:calc(100% - 32px);margin:18px auto 0;display:grid;grid-template-columns:1fr;gap:12px}
+  .home-page .hero-side-cards .share-card,.home-page .home-weather-card{position:relative;inset:auto;display:flex;width:100%;height:auto;min-height:205px;padding:23px;border-radius:18px}
+  .home-page .hero-side-cards .next-adventure-card h2{font-size:25px;white-space:normal}
+  .home-page .hero-side-cards .next-adventure-card>a{font-size:11px}
+  .home-page .home-quick-actions{width:calc(100% - 32px);grid-template-columns:1fr;gap:10px;margin-top:20px}
+  .home-page .home-quick-actions a{min-height:82px}
+  .home-page .home-quick-actions small{display:block}
+  .home-page .community-section,.home-page .creators-section{width:100%;padding-left:16px;padding-right:16px;overflow:hidden}
+  .home-page .community-section>.section-title{display:flex}
+  .home-page .community-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:26px}
+  .home-page .post-grid{display:flex;position:static;width:100%;height:auto;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding:0 0 10px}
+  .home-page .post-card,.home-page .post-card:nth-child(3){display:block;position:relative;right:auto;flex:0 0 86%;width:auto;min-width:0;height:390px;transform:none;scroll-snap-align:start}
+  .home-page .guides{width:100%;padding:0;border-left:0}
+  .home-page .guides-heading h2{font-size:18px;white-space:normal}
+  .home-page .guides-scroll{height:auto;max-height:390px;padding-right:3px}
+  .home-page .guides article{height:82px;grid-template-columns:96px minmax(0,1fr) 38px;gap:8px}
+  .home-page .guides article h3{font-size:12px}
+  .home-page .guides article p,.home-page .guides article small{font-size:9px}
+  .home-page .outline-button{height:46px}
+  .home-page .creator-carousel-section{padding-left:16px;padding-right:16px}
+  .home-page .creator-carousel-section .creator-card{flex-basis:min(78vw,280px)}
+  .home-page .discovery-heading{gap:12px}
+  .home-page .discovery-heading h2{font-size:24px}
+  .home-page .weekly-book{align-items:flex-start;flex-direction:column;gap:14px}
+  .home-page .weekly-book a{width:100%;text-align:center}
+}
+
+@media (max-width:400px){
+  .home-page .hero h1{font-size:37px}
+  .home-page .hero-content>p{font-size:14px}
+  .home-page .home-weather-card .weather-temperature strong{font-size:44px}
+  .home-page .section-title h2,.home-page .creator-carousel-section .section-title h2{font-size:22px}
+}
+
+/* Homepage action labels: clear text without decorative arrows. */
+.home-page .search-submit{font-size:14px;font-weight:600;font-family:inherit}
+.home-page .cruise-discovery-card{grid-template-columns:50px minmax(0,1fr)}
+@media (min-width:641px){
+  .home-page .search-bar{grid-template-columns:1.05fr 1.3fr .8fr 78px}
+  .home-page .search-submit{width:72px;border-radius:12px}
+}
+
+/* Focused hero with compact preview weather and booking-only adventure card. */
+.home-page .hero-weather-summary{display:flex;align-items:center;gap:9px;width:max-content;max-width:100%;margin-bottom:22px;padding:9px 13px;border:1px solid #ffffff30;border-radius:24px;background:#102f3880;color:#fff;font-size:13px;line-height:1.4;backdrop-filter:blur(8px)}
+.home-page .hero-weather-summary svg{width:19px;height:19px;fill:none;stroke:#a9ebe1;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.home-page .next-adventure-card[hidden],.home-page .hero-side-cards:not(:has(.next-adventure-card:not([hidden]))){display:none}
+@media(min-width:1200px){
+  .home-page .hero{height:auto;min-height:500px;padding-bottom:44px}
+  .home-page .hero-content{padding-top:38px!important;padding-right:0;width:min(1450px,calc(100% - 72px))}
+  .home-page .hero h1{max-width:760px}
+  .home-page .search-bar,.home-page .cruise-discovery-card{width:min(752px,60vw)}
+  .home-page .hero-side-cards{width:280px;grid-template-columns:1fr}
+}
+@media(min-width:641px) and (max-width:1199px){
+  .home-page .hero{min-height:0;padding-bottom:40px}
+  .home-page .hero-content{padding-top:36px!important}
+}
+@media(max-width:640px){
+  .home-page .hero-content{padding-top:24px!important}
+  .home-page .hero-weather-summary{font-size:12px;gap:7px;margin-bottom:20px;padding:8px 11px}
+  .home-page .hero h1{font-size:clamp(34px,9.5vw,42px)}
+  .home-page .hero-content>p{margin:12px 0 20px!important}
+  .home-page .cruise-discovery-card{min-height:74px;margin-top:12px}
+  .home-page .home-quick-actions{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .home-page .home-quick-actions a{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:7px;min-width:0;min-height:144px;padding:15px;border-radius:16px}
+  .home-page .home-quick-actions a>span{width:36px;height:36px;margin:0;flex-shrink:0}
+  .home-page .home-quick-actions strong{font-size:13px;line-height:1.3}
+  .home-page .home-quick-actions small{font-size:11px;line-height:1.35;margin:0}
+}
+@media(max-width:640px){.home-page .home-quick-actions strong{align-self:flex-start;text-align:left}}
+.home-page #top{scroll-margin-top:68px}
+
+/* Shared homepage rhythm and readable card details. */
+.home-page{--home-gutter:36px;--home-section-gap:56px;--home-card-radius:18px}
+.home-page .home-discovery-section,.home-page .community-section,.home-page .creators-section{width:min(1450px,calc(100% - var(--home-gutter)*2));max-width:none;padding:0;margin:var(--home-section-gap) auto 0}
+.home-page #popular-today{margin-top:var(--home-section-gap)}
+.home-page .home-quick-actions{width:min(1450px,calc(100% - var(--home-gutter)*2))}
+.home-page .discovery-heading,.home-page .section-title{gap:24px;margin-bottom:20px;align-items:flex-end}
+.home-page .discovery-heading>div:first-child,.home-page .section-title>div:first-child{min-width:0}
+.home-page .discovery-heading h2,.home-page .section-title h2{font-size:28px;line-height:1.2;margin:4px 0 8px}
+.home-page .discovery-heading p,.home-page .section-title p{font-size:14px;line-height:1.5;margin:0;color:#52636a;max-width:620px}
+.home-page .discovery-heading>div>span{font-size:11px}
+.home-page .discovery-heading>a,.home-page .section-title a,.home-page .carousel-controls a{font-size:13px;line-height:1.4;white-space:nowrap;flex-shrink:0}
+.home-page .carousel-controls{flex-shrink:0;gap:8px}
+.home-page .carousel-controls button{width:40px;height:40px}
+.home-page .experience-carousel,.home-page .creator-row{gap:18px;padding:2px 0 8px}
+.home-page .experience-card,.home-page .creator-card,.home-page .post-card,.home-page .spotlight-feature,.home-page .weekly-itinerary-card{border-radius:var(--home-card-radius)}
+.home-page .experience-card{flex-basis:280px}
+.home-page .experience-card-image{height:190px}
+.home-page .experience-card-body{padding:16px}
+.home-page .experience-card-body h3{font-size:15px;line-height:1.4;min-height:42px}
+.home-page .experience-card-body p{font-size:12px;line-height:1.5;margin:6px 0 16px;min-height:36px}
+.home-page .experience-card-body>div{font-size:12px;gap:8px;flex-wrap:wrap;line-height:1.5}
+.home-page .experience-card-body strong{font-size:14px}
+.home-page .experience-card-image>span{font-size:10px;left:12px;top:12px;max-width:calc(100% - 72px)}
+.home-page .experience-heart,.home-page .card-footer .post-card-heart{width:40px;height:40px}
+.home-page .experience-heart{right:8px;top:8px;background-color:#fffffff0!important}
+.home-page .post-card .post-card-heart{position:absolute;right:12px;top:12px;background-color:#fffffff0!important}
+.home-page .post-card .card-footer{margin:0}
+.home-page .post-copy{position:absolute;inset:auto 16px 16px}
+.home-page .post-copy h3{font-size:22px;line-height:1.15}
+.home-page .post-copy>p{font-size:12px;line-height:1.5}
+.home-page .author{font-size:12px!important}
+.home-page .tags span{font-size:10px}
+.home-page .guides-heading h2{font-size:18px;white-space:normal;line-height:1.3}
+.home-page .guides article h3{font-size:13px;line-height:1.4}
+.home-page .guides article p,.home-page .guides article small{font-size:11px;line-height:1.4}
+.home-page .outline-button{font-size:13px;min-height:44px}
+.home-page .creator-header h3{font-size:14px}
+.home-page .creator-header p,.home-page .creator-header small{font-size:11px;line-height:1.4}
+.home-page .creator-header button{font-size:12px;min-height:36px}
+.home-page .spotlight-meta,.home-page .spotlight-footer small,.home-page .weekly-route b,.home-page .weekly-book span{font-size:12px;line-height:1.5}
+.home-page .spotlight-copy>p{font-size:14px;line-height:1.6}
+.home-page .weekly-route span,.home-page .weekly-book strong{font-size:14px;line-height:1.5}
+.home-page .spotlight-footer a,.home-page .weekly-book a{font-size:13px;min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+.home-page .spotlight-footer,.home-page .weekly-book{gap:16px;flex-wrap:wrap}
+.home-page .deals-section{padding-bottom:var(--home-section-gap)}
+@media(max-width:1199px){.home-page{--home-gutter:28px}}
+@media(max-width:760px){
+  .home-page{--home-gutter:16px;--home-section-gap:40px}
+  .home-page .discovery-heading,.home-page .section-title{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:18px}
+  .home-page .discovery-heading h2,.home-page .section-title h2{font-size:25px}
+  .home-page .discovery-heading p,.home-page .section-title p{max-width:none;font-size:13px}
+  .home-page .carousel-controls{width:100%}
+  .home-page .carousel-controls a{display:inline-flex;margin-left:auto;align-items:center;min-height:40px}
+  .home-page .discovery-heading>a{min-height:32px;display:inline-flex;align-items:center}
+  .home-page .experience-card{flex-basis:268px}
+  .home-page .spotlight-copy,.home-page .weekly-route{padding:24px}
+  .home-page .creator-carousel-section .creator-card{flex-basis:300px}
+}
+
+/* Photo crops keep the main subject visible across the homepage. */
+.home-page .spotlight-image{background-position:center 58%}
+.home-page .weekly-cover{background-position:center}
+.home-page .creator-gallery img{object-fit:cover;object-position:center}
+@media(max-width:760px){
+  .home-page .guides-scroll{height:auto;max-height:none;overflow:visible;padding:0}
+  .home-page .guides-scroll article:nth-child(n+4){display:none}
+  .home-page .guide-scroll-actions{display:none}
+  .home-page .guides .outline-button{position:static;margin-top:12px;width:100%}
+}
+
+/* Clear search affordances and a mobile navigation disclosure. */
+.home-page .mobile-nav-personal{display:none}
+.home-page .menu-button{width:44px;height:44px;padding:10px;border-radius:10px;color:white}
+.home-page .menu-button svg,.home-page .field-icon svg{display:block;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.home-page .menu-button .menu-close-icon{display:none}
+.home-page .menu-button[aria-expanded="true"] .menu-open-icon{display:none}
+.home-page .menu-button[aria-expanded="true"] .menu-close-icon{display:block}
+.home-page .field-icon{display:flex;flex-shrink:0;color:#007b7c}
+.home-page .search-bar small{font-size:11px;font-weight:600;margin-bottom:5px}
+.home-page .search-bar input,.home-page .search-bar select{font-size:13px;line-height:1.4}
+.home-page .search-bar input::placeholder{color:#65777c;opacity:1}
+.home-page .search-bar label{border-radius:8px;transition:background-color .15s}
+.home-page .search-bar label:focus-within{background:#edf7f5;box-shadow:inset 0 0 0 2px #007b7c}
+.home-page .search-date-control{position:relative;display:block;min-height:20px}
+.home-page .search-date-placeholder{position:absolute;left:0;top:0;color:#52686d;pointer-events:none;font-size:13px;line-height:1.4}
+.home-page .search-date-control input{opacity:0;position:relative;z-index:1;cursor:pointer;min-height:20px}
+.home-page .search-date-control.has-date input,.home-page .search-date-control:focus-within input{opacity:1}
+.home-page .search-date-control.has-date .search-date-placeholder,.home-page .search-date-control:focus-within .search-date-placeholder{display:none}
+.home-page .search-submit:hover{background:#007b7c}
+.home-page a:focus-visible,.home-page button:focus-visible{outline:3px solid #00a6a6;outline-offset:4px}
+@media(min-width:641px){
+  .home-page .search-bar{grid-template-columns:1.1fr 1.35fr 1fr 78px;height:74px}
+  .home-page .search-bar label{padding:0 10px;gap:8px}
+}
+@media(max-width:640px){
+  .home-page .header .menu-button{display:grid;place-items:center}
+  .home-page .header .nav{display:none;position:absolute;top:64px;left:0;right:0;max-height:calc(100dvh - 64px);overflow-y:auto;background:#fffdf8;color:#062f35;padding:16px;border-bottom:1px solid #dce8e5;border-radius:0 0 20px 20px;box-shadow:0 18px 32px #102f3833}
+  .home-page .header .nav.open{display:flex;flex-direction:column;align-items:stretch;gap:4px}
+  .home-page .header .nav a{display:flex;align-items:center;min-height:48px;height:auto;padding:12px 16px;border:0;border-radius:10px;color:#062f35;font-size:16px;font-weight:600}
+  .home-page .header .nav a:hover,.home-page .header .nav a:focus-visible{background:#edf5f2}
+  .home-page .header .nav a.active{background:#e1f0eb;color:#007b7c}
+  .home-page .mobile-nav-personal{display:grid;gap:4px;margin-top:12px;padding-top:14px;border-top:1px solid #dce8e5}
+  .home-page .mobile-nav-personal>span{padding:0 16px 6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#65777c}
+  .home-page .search-bar input,.home-page .search-bar select{font-size:16px}
+  .home-page .search-date-placeholder{font-size:16px}
+  .home-page .search-date-control,.home-page .search-date-control input{min-height:24px}
+}
+@media(max-width:640px){.home-page .header .nav{background:#fffdf8!important}}
+
+/* Native card links keep keyboard navigation separate from save/follow actions. */
+.home-page .experience-card,.home-page .creator-card{position:relative;transition:box-shadow .18s ease,border-color .18s ease}
+.home-page .home-card-link{color:inherit;text-decoration:none}
+.home-page .home-card-link::after{content:"";position:absolute;inset:0;z-index:1;border-radius:var(--home-card-radius)}
+.home-page .home-card-link:focus-visible{outline:none}
+.home-page .home-card-link:focus-visible::after{outline:3px solid #007b7c;outline-offset:-3px}
+.home-page .experience-heart,.home-page .follow-button{z-index:2}
+.home-page .follow-button{position:relative}
+.home-page .experience-heart:focus-visible,.home-page .follow-button:focus-visible{outline-offset:-3px}
+@media(hover:hover){
+ .home-page .experience-card:hover,.home-page .creator-card:hover{border-color:#8db9b2;box-shadow:0 7px 20px #123f451a}
+ .home-page .home-card-link:hover{text-decoration:underline;text-underline-offset:3px}
+ .home-page .follow-button:hover,.home-page .outline-button:hover{background:#e6f3ee}
+ .home-page .home-quick-actions a:hover{border-color:#8db9b2;background:#f4faf7}
+ .home-page .spotlight-footer a:hover,.home-page .weekly-book a:hover{background:#007b7c}
+}
+.home-page .home-footer{margin:0;padding:48px var(--home-gutter) 24px;text-align:left;background:#15353b;color:#f8faf5}
+.home-page .home-footer-content,.home-page .home-footer-bottom{width:min(1450px,100%);margin:auto}
+.home-page .home-footer-content{display:grid;grid-template-columns:1fr 2fr;gap:64px}
+.home-page .home-footer-brand>a{font-family:Georgia,serif;font-size:28px;letter-spacing:.13em;color:#fff}
+.home-page .home-footer-brand p{font-size:15px;margin:16px 0 8px}
+.home-page .home-footer-brand>span{color:#bdd0ce;font-size:13px;line-height:1.5}
+.home-page .home-footer-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.home-page .home-footer-links h2{font:600 14px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:0 0 16px;color:#b5e5dc}
+.home-page .home-footer-links a{display:block;width:fit-content;color:#e2eae7;font-size:13px;line-height:1.5;padding:7px 0}
+.home-page .home-footer a:hover{text-decoration:underline;text-underline-offset:4px}
+.home-page .home-footer-bottom{display:flex;justify-content:space-between;gap:24px;border-top:1px solid #ffffff24;padding-top:22px;margin-top:40px;color:#bdd0ce;font-size:12px}
+@media(max-width:1000px){.home-page .home-footer-content{grid-template-columns:1fr;gap:32px}}
+@media(max-width:640px){
+ .home-page .home-footer{padding-top:36px}
+ .home-page .home-footer-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}
+ .home-page .home-footer-links a{min-height:44px;font-size:14px;padding:10px 0}
+ .home-page .home-footer-links h2{margin-bottom:6px}
+}
+@media(prefers-reduced-motion:reduce){.home-page .experience-card,.home-page .creator-card,.home-page .search-bar label{transition:none}.home-page .experience-carousel{scroll-behavior:auto}}
+/* Integrated discovery mode matches the results-page search. */
+.home-page .home-search-modes{display:flex;align-items:center;gap:2px;background:#eaf1ed;border-radius:25px;padding:4px;margin:0 6px;min-width:0}
+.home-page .home-search-modes button{flex:1 1 0;min-width:0;border:0;border-radius:22px;padding:11px 10px;min-height:42px;background:transparent;color:#49645e;font:600 12px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;white-space:nowrap;cursor:pointer}
+.home-page .home-search-modes button[aria-pressed=true]{background:#007b7c;color:#fff}
+.home-page .search-bar{grid-template-columns:minmax(135px,1.5fr) auto minmax(100px,1fr) minmax(100px,.85fr) 70px}
+.home-page .search-bar label{padding:0 8px;gap:6px;min-width:0}.home-page .search-bar label>span:last-child{min-width:0;width:100%}
+.home-page .search-bar .field-icon{display:none}.home-page .search-bar input,.home-page .search-bar select{width:100%;min-width:0}
+@media(min-width:1200px){.home-page .search-bar{width:min(800px,57vw)}}
+@media(min-width:641px) and (max-width:1199px){.home-page .search-bar{width:100%}}
+@media(max-width:640px){.home-page .search-bar{grid-template-columns:minmax(0,1fr) auto;height:auto}.home-page .search-bar>label:first-child{grid-column:1/-1}.home-page .home-search-modes{grid-column:1/-1;margin:10px 0;width:100%}.home-page .home-search-modes button{flex:1;font-size:14px}.home-page .search-bar label{padding:10px 8px;min-height:60px}.home-page .search-bar .search-date-field{grid-column:2}.home-page .search-bar .search-submit{grid-column:1/-1}.home-page .search-bar label:has([name=where]){grid-column:1}}

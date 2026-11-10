@@ -1,0 +1,76 @@
+/* Guide rows must not inherit a track height from a portrait image's intrinsic size. */
+body.home-page .guides article{height:96px;grid-template-columns:84px minmax(0,1fr) 52px;grid-template-rows:minmax(0,1fr);align-items:center;gap:12px;padding:0 8px 0 0;box-sizing:border-box}
+body.home-page .guides article>img{display:block;width:100%;height:100%;min-height:0;min-width:0;object-fit:cover;align-self:stretch}
+body.home-page .guides article>div{min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:4px}
+body.home-page .guides article h3{margin:0;font-size:15px;line-height:1.35;white-space:normal;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+body.home-page .guides article p,body.home-page .guides article small{display:block;margin:0;font-size:12px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.home-page .guides article>button{align-self:center;justify-self:center;margin:0}
+@media(max-width:640px){body.home-page .guides article{height:104px;grid-template-columns:84px minmax(0,1fr) 44px;gap:9px;padding-right:5px}body.home-page .guides article h3{font-size:13px}body.home-page .guides article p,body.home-page .guides article small{font-size:11px}}
+/* A single centered icon box avoids an extra grid row for the legacy text glyph. */
+body[class][class] button:is(.heart,.experience-heart,.save-card,.post-card-heart,.community-save-guide,.social-like,.explore-modal-like,[data-remove-favorite]){display:inline-flex!important;align-items:center!important;justify-content:center!important;width:44px!important;height:44px!important;min-width:44px;min-height:44px;padding:0!important;font-size:0!important;line-height:0!important;box-sizing:border-box;flex-shrink:0}
+body[class][class] button:is(.heart,.experience-heart,.save-card,.post-card-heart,.community-save-guide,.social-like,.explore-modal-like,[data-remove-favorite])::before{content:""!important;display:block!important;position:static!important;inset:auto!important;transform:none!important;margin:0!important;width:24px!important;height:24px!important;flex:0 0 24px;background-position:center!important;background-size:24px 24px!important;background-repeat:no-repeat!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23062f35' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z'/%3E%3C/svg%3E")!important}
+body[class][class] button:is(.heart,.experience-heart,.save-card,.post-card-heart,.community-save-guide,.social-like,.explore-modal-like,[data-remove-favorite]):is([aria-pressed=true],.heart-active,.liked,.saved,[data-remove-favorite])::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ef3f58' stroke='%23ef3f58' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z'/%3E%3C/svg%3E")!important}
+body[class] .post-card .post-card-heart,body[class] .experience-card .experience-heart,body[class] .route-cover .save-card{top:12px!important;right:12px!important;bottom:auto!important;left:auto!important;border-radius:50%;background-color:#fffffff0!important}
+
+body.home-page #guides-scroll{height:312px;max-height:312px;overflow-y:auto}
+@media(max-width:640px){body.home-page #guides-scroll{height:336px;max-height:336px}}
+
+/* Shared account menu icons, including the signed-out choices. */
+body .voyara-account-menu .account-row-icon,body .voyara-account-menu .guest-signin-option>i{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0;line-height:0;color:var(--teal,#007b7c)}
+body .voyara-account-menu .account-row-icon svg,body .voyara-account-menu .guest-signin-option>i svg{display:block;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+body .voyara-account-menu .account-logout .account-row-icon{color:#a33d46}
+body[class] .header .voyara-account-menu .account-row-icon svg,body[class] .header .voyara-account-menu .guest-signin-option>i svg{color:#007b7c!important;stroke:#007b7c!important;fill:none!important}
+body[class] .header .voyara-account-menu .account-logout .account-row-icon svg{color:#a33d46!important;stroke:#a33d46!important}
+/* Keep the right-aligned account control fixed; space its neighbours evenly. */
+@media(min-width:761px){
+ body[class] .header.unified-navigation .header-actions{gap:6px!important;justify-self:end;justify-content:flex-end}
+ body[class] .header.unified-navigation .header-actions>.line-icon-button,
+ body[class] .header.unified-navigation .header-actions>.account-menu-anchor{width:44px;min-width:44px;flex:0 0 44px;margin:0}
+}
+
+.route-card h3>a{display:block}
+/* Filter visibility must win over each card component's grid/flex layout. */
+body [data-filter-card].hidden-card{display:none!important}
+@media(max-width:760px){
+ body[class] .header.unified-navigation .nav a{color:#25484a!important}
+ body[class] .header.unified-navigation .nav a[aria-current=page]{color:#104f49!important}
+ body[class] .header.unified-navigation .nav .mobile-logout{color:#a33d46!important;min-height:48px;padding:12px 16px;text-align:left;font-size:16px}
+}
+
+.voyager-mobile-nav svg,.post-tag svg,.business-header-actions>button svg{display:block;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.voyager-mobile-nav>a,.voyager-mobile-nav>button{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
+
+/* Trending cards share one price/action row and centered calendar badges. */
+.hot-events-page .event-card .listing-body h3{min-height:2.5em}
+.hot-events-page .event-card .listing-body p{margin-bottom:20px}
+.hot-events-page .event-card .card-actions{margin-top:auto;gap:16px;padding-top:4px}
+.hot-events-page .event-card .card-actions .primary-action{flex:0 0 auto;margin:0;min-width:114px}
+.hot-events-page .event-card .date-tile{box-sizing:border-box;width:48px;height:58px;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center}
+.hot-events-page .event-card .date-tile strong{display:block;margin:0;line-height:1;font-variant-numeric:tabular-nums}
+.hot-events-page .event-card .date-tile span{display:block;margin:0;line-height:1.2;letter-spacing:0}
+
+.hot-events-page .event-card .listing-meta{min-height:22px;align-items:center}
+
+/* Voyagers: flame reactions; heart saves, matching the tablet app. */
+body[class][class] .social-post .social-post-actions button.social-like{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:44px!important;height:44px!important;min-width:44px;padding:0!important;font-size:0!important;line-height:0!important}
+body[class][class] .social-post .social-post-actions button.social-like::before{content:""!important;display:block!important;position:static!important;inset:auto!important;transform:none!important;margin:0!important;width:20px!important;height:20px!important;flex:0 0 20px;background:center/20px 20px no-repeat url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%235d7274%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8.5%2014.5A2.5%202.5%200%200011%2012c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054%202-6%20.5%202.5%202%204.9%204%206.5%202%201.6%203%203.5%203%205.5a7%207%200%2011-14%200c0-1.153.433-2.294%201-3a2.5%202.5%200%20002.5%202.5z%22%2F%3E%3C%2Fsvg%3E")!important}
+body[class][class] .social-post .social-post-actions button.social-like:is([aria-pressed="true"],.liked,.saved)::before{content:""!important;display:block!important;position:static!important;inset:auto!important;transform:none!important;margin:0!important;width:20px!important;height:20px!important;flex:0 0 20px;background:center/20px 20px no-repeat url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23eb795d%22%20stroke%3D%22%23eb795d%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8.5%2014.5A2.5%202.5%200%200011%2012c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054%202-6%20.5%202.5%202%204.9%204%206.5%202%201.6%203%203.5%203%205.5a7%207%200%2011-14%200c0-1.153.433-2.294%201-3a2.5%202.5%200%20002.5%202.5z%22%2F%3E%3C%2Fsvg%3E")!important}
+body[class][class] .social-post .social-post-actions button.social-like::after{display:none!important}
+body[class][class] .social-post .social-post-actions button.social-save{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:44px!important;height:44px!important;min-width:44px;padding:0!important;font-size:0!important;line-height:0!important}
+body[class][class] .social-post .social-post-actions button.social-save::before{content:""!important;display:block!important;position:static!important;inset:auto!important;transform:none!important;margin:0!important;width:18px!important;height:18px!important;flex:0 0 18px;background:center/18px 18px no-repeat url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%235d7274%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%209.5a5.5%205.5%200%200%201%209.591-3.676.56.56%200%200%200%20.818%200A5.49%205.49%200%200%201%2022%209.5c0%202.29-1.5%204-3%205.5l-5.492%205.313a2%202%200%200%201-3%20.019L5%2015c-1.5-1.5-3-3.2-3-5.5%22%2F%3E%3C%2Fsvg%3E")!important}
+body[class][class] .social-post .social-post-actions button.social-save:is([aria-pressed="true"],.liked,.saved)::before{content:""!important;display:block!important;position:static!important;inset:auto!important;transform:none!important;margin:0!important;width:18px!important;height:18px!important;flex:0 0 18px;background:center/18px 18px no-repeat url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23ef3f58%22%20stroke%3D%22%23ef3f58%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%209.5a5.5%205.5%200%200%201%209.591-3.676.56.56%200%200%200%20.818%200A5.49%205.49%200%200%201%2022%209.5c0%202.29-1.5%204-3%205.5l-5.492%205.313a2%202%200%200%201-3%20.019L5%2015c-1.5-1.5-3-3.2-3-5.5%22%2F%3E%3C%2Fsvg%3E")!important}
+body[class][class] .social-post .social-post-actions button.social-save::after{display:none!important}
+body[class][class] .social-post .social-post-actions .voyage-share-trigger{display:none!important}
+
+/* Match the app comment bubble while retaining a comfortable hit target. */
+body[class][class] .social-post .social-post-actions button.social-comment{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:44px!important;height:44px!important;min-width:44px;padding:0!important;font-size:0!important;line-height:0!important}
+body[class][class] .social-post .social-post-actions button.social-comment::before{content:""!important;display:block!important;position:static!important;inset:auto!important;transform:none!important;margin:0!important;width:19px!important;height:19px!important;flex:0 0 19px;background:center/19px 19px no-repeat url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%235d7274%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M21%2015a2%202%200%2001-2%202H7l-4%204V5a2%202%200%20012-2h14a2%202%200%20012%202z%22%2F%3E%3C%2Fsvg%3E")!important}
+body[class][class] .social-post .social-post-actions button.social-comment::after{display:none!important}
+body[class][class] .social-post .social-post-actions button.social-save{box-sizing:border-box!important;width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;max-height:40px!important;flex:0 0 40px!important;border:1px solid rgba(6,47,53,.12)!important;border-radius:50%!important;background:#fff!important;box-shadow:none!important}
+
+/* Match itinerary and guide saves to the app-style circular heart. */
+body[class][class] .community-detail-aside button.community-save-guide{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:44px!important;height:44px!important;min-width:44px;padding:0!important;font-size:0!important;line-height:0!important}
+body[class][class] .community-detail-aside button.community-save-guide::before{content:""!important;display:block!important;position:static!important;inset:auto!important;transform:none!important;margin:0!important;width:18px!important;height:18px!important;flex:0 0 18px;background:center/18px 18px no-repeat url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%235d7274%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%209.5a5.5%205.5%200%200%201%209.591-3.676.56.56%200%200%200%20.818%200A5.49%205.49%200%200%201%2022%209.5c0%202.29-1.5%204-3%205.5l-5.492%205.313a2%202%200%200%201-3%20.019L5%2015c-1.5-1.5-3-3.2-3-5.5%22%2F%3E%3C%2Fsvg%3E")!important}
+body[class][class] .community-detail-aside button.community-save-guide:is([aria-pressed="true"],.liked,.saved)::before{content:""!important;display:block!important;position:static!important;inset:auto!important;transform:none!important;margin:0!important;width:18px!important;height:18px!important;flex:0 0 18px;background:center/18px 18px no-repeat url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23ef3f58%22%20stroke%3D%22%23ef3f58%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%209.5a5.5%205.5%200%200%201%209.591-3.676.56.56%200%200%200%20.818%200A5.49%205.49%200%200%201%2022%209.5c0%202.29-1.5%204-3%205.5l-5.492%205.313a2%202%200%200%201-3%20.019L5%2015c-1.5-1.5-3-3.2-3-5.5%22%2F%3E%3C%2Fsvg%3E")!important}
+body[class][class] .community-detail-aside button.community-save-guide::after{display:none!important}
+body[class][class] .community-detail-aside button.community-save-guide{box-sizing:border-box!important;width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;max-height:40px!important;flex:0 0 40px!important;border:1px solid rgba(6,47,53,.12)!important;border-radius:50%!important;background:#fff!important;box-shadow:none!important}

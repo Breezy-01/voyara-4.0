@@ -1,0 +1,40 @@
+{
+  "purpose": "Local design placeholders; not verified operator or excursion photographs. Remote source images remain hosted by their providers.",
+  "photos": [
+    {
+      "id": 30029771,
+      "author": "Mehmet S\u00fctla\u015f",
+      "source": "https://www.pexels.com/photo/sailing-boat-at-sunset-on-calm-ocean-waters-30029771/",
+      "usage": "Sailing spotlight"
+    },
+    {
+      "id": 7210380,
+      "author": "Jan Simons",
+      "source": "https://www.pexels.com/photo/close-up-shot-of-a-sea-turtle-swimming-underwater-7210380/",
+      "usage": "Turtle Cove reef cruise"
+    },
+    {
+      "id": 4119236,
+      "author": "Douglas Woolfolk",
+      "source": "https://www.pexels.com/photo/buildings-on-sea-shore-in-nassau-on-bahamas-4119236/",
+      "usage": "Nassau itinerary and tour"
+    },
+    {
+      "id": 17908376,
+      "author": "Kelsey Elwood",
+      "source": "https://www.pexels.com/photo/palm-trees-on-beach-17908376/",
+      "usage": "Beach club"
+    },
+    {
+      "id": 4443600,
+      "author": "Rachel Strong",
+      "source": "https://www.pexels.com/photo/sailboat-in-sea-at-sunset-4443600/",
+      "usage": "Small-group sailing"
+    },
+    {
+      "id": 4985286,
+      "source": "https://www.pexels.com/photo/brown-and-black-animal-on-water-4985286/",
+      "usage": "Exuma swimming pigs"
+    }
+  ]
+}
